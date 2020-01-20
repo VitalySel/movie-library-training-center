@@ -11,7 +11,7 @@ public class Genres {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "genre_id", unique = true)
+    @Column(name = "idgenres", unique = true)
     private Long id;
 
     @Column(name = "genre_name",unique = true, length = 25)
@@ -23,14 +23,14 @@ public class Genres {
 
     @ManyToMany
     @JoinTable(name = "genres_actors",
-            joinColumns = {@JoinColumn(name = "genres_id",referencedColumnName = "genres_id")},
-            inverseJoinColumns = {@JoinColumn(name = "actors_id",referencedColumnName = "actors_id")})
+            joinColumns = {@JoinColumn(name = "genre_idgenres",referencedColumnName = "idgenres")},
+            inverseJoinColumns = {@JoinColumn(name = "actor_idactors",referencedColumnName = "idactors")})
     private Set<Actor> actors = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "genres_producers",
-            joinColumns = {@JoinColumn(name = "genres_id",referencedColumnName = "genres_id")},
-            inverseJoinColumns = {@JoinColumn(name = "producers_id",referencedColumnName = "producers_id")})
+            joinColumns = {@JoinColumn(name = "genre_idgenres",referencedColumnName = "idgenres")},
+            inverseJoinColumns = {@JoinColumn(name = "producer_idproducers",referencedColumnName = "idproducers")})
     private Set<Producer> producers = new HashSet<>();
 
     public Genres() {

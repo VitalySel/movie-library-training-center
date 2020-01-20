@@ -14,7 +14,7 @@ public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "movie_id", unique = true)
+    @Column(name = "idmovies")
     private Long id;
 
     @Column(name = "movie_name")
@@ -35,18 +35,18 @@ public class Movie {
 
     @ManyToMany
     @JoinTable(name = "movie_genres",
-            joinColumns = {@JoinColumn(name = "movie_id",referencedColumnName = "movie_id")},
-            inverseJoinColumns = {@JoinColumn(name = "genres_id",referencedColumnName = "genres_id")})
+            joinColumns = {@JoinColumn(name = "movie_idmovies",referencedColumnName = "idmovies")},
+            inverseJoinColumns = {@JoinColumn(name = "genres_idgenres",referencedColumnName = "idgenres")})
     private List<Genres> genres = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "movie_actors",
-            joinColumns = {@JoinColumn(name = "movie_id",referencedColumnName = "movie_id")},
-            inverseJoinColumns = {@JoinColumn(name = "actors_id",referencedColumnName = "actors_id")})
+            joinColumns = {@JoinColumn(name = "movie_idmovies",referencedColumnName = "idmovies")},
+            inverseJoinColumns = {@JoinColumn(name = "actor_idactors",referencedColumnName = "idactors")})
     private Set<Actor> actors = new HashSet<>();
 
     @ManyToOne(optional = false,cascade = CascadeType.MERGE)
-    @JoinColumn(name = "movie_id")
+    @JoinColumn(name = "idmovies",insertable = false, updatable = false)
     private Producer producers;
 
     public Movie() {

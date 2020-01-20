@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Notes </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Fonts -->
+    <!-- Lato -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.css}">
+    <link rel="stylesheet" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <!-- Responsive Stylesheet -->
+    <link rel="stylesheet" th:href="@{/css/responsive.css}">
+</head>
+
+<body id="body">
+<div class="navbar-default navbar-fixed-top" id="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <h1>Movier</h1>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <nav class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav navbar-right" id="top-nav">
+                <li class="current"><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/index}">Movies</a></li>
+                <li><a th:href="@{/index}">Genres</a></li>
+                <li><a th:href="@{/index}">Contact</a></li>
+            </ul>
+        </nav><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<section id="hero-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="block">
+                    <h1 class="wow fadeInDown">Movie Catalog</h1>
+                    <p class="wow fadeInDown" data-wow-delay="0.3s">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
+                    <div class="wow fadeInDown" data-wow-delay="0.3s">
+                        <a class="btn btn-default btn-home" th:href="@{/login}" role="button">Log in</a>
+                        <a class="btn btn-default btn-home" th:href="@{/registration}" role="button">Registration</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 wow zoomIn">
+                <div class="block">
+                    <div class="counter text-center">
+                        <ul id="countdown_dashboard">
+                            <li>
+                                <div class="dash">
+                                    <div class="digit">0</div>
+                                    <div class="digit">0</div>
+                                    <div class="digit">0</div>
+                                    <span class="dash_title">Movie</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="dash ">
+                                    <div class="digit">0</div>
+                                    <div class="digit">0</div>
+                                    <span class="dash_title">Actors</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="dash ">
+                                    <div class="digit">0</div>
+                                    <div class="digit">0</div>
+                                    <span class="dash_title">Producers</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .row close -->
+    </div><!-- .container close -->
+</section><!-- header close -->
+</body>
+</html>

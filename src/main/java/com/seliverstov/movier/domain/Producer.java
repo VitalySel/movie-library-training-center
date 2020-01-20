@@ -13,7 +13,7 @@ public class Producer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "producer_id", unique = true)
+    @Column(name = "idproducers", unique = true)
     private Long id;
 
     @Column(name = "producer_name")
