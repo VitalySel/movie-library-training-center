@@ -41,8 +41,7 @@ public class MailConfiguration {
 
         properties.setProperty("mail.transport.protocol", protocol);
         properties.setProperty("mail.debug", debug);
-
-
+        
         return mailSender;
     }
 }
