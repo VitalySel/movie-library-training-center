@@ -1,13 +1,16 @@
 package com.seliverstov.movier.service;
 
+import com.seliverstov.movier.domain.Role;
 import com.seliverstov.movier.domain.User;
-import com.seliverstov.movier.domain.UserDetailsImpl;
 import com.seliverstov.movier.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -17,26 +20,27 @@ public class UserService implements UserDetailsService {
     @Autowired
     private MailService mailService;
 
-    public User findByMail(String mail){
-        return userRepo.findByMail(mail);
-    }
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     public User findByActivationCode(String code){
         return userRepo.findByActivationCode(code);
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepo.findByMail(email);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepo.findByUsername(username);
         if (user == null) {
-            throw new UsernameNotFoundException("Could not find user with name '" + email + "'");
+            throw new UsernameNotFoundException("Could not find user with name '" + username + "'");
         }
-        return new UserDetailsImpl(user);
+        return user;
     }
 
     public void addUser(User user){
-        user.setPassword(user.getPassword());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(false);
+        user.setRoles(Collections.singleton(Role.USER));
         userRepo.save(user);
         String message = String.format(
                 "Hello %s! \n" +
