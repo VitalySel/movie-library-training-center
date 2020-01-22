@@ -44,4 +44,13 @@ public class UserController {
         userService.update(usr);
         return "redirect:/profile";
     }
+
+    @GetMapping(value = "/addAvatar")
+    public String addAvatar() {
+        return "addAvatar";
+    }
+    @PostMapping(value = "/addAvatar")
+    public String addAvatarUser() {
+        return "redirect:/profile";
+    }
 }
