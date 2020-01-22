@@ -21,6 +21,7 @@
     <link rel="stylesheet" th:href="@{/css/owl.carousel.css}">
     <link rel="stylesheet" th:href="@{/css/animate.css}">
     <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
     <!-- Responsive Stylesheet -->
     <link rel="stylesheet" th:href="@{/css/responsive.css}">
 </head>
@@ -37,7 +38,7 @@
         <nav class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav navbar-right" id="top-nav">
                 <li class="current"><a th:href="@{/}">Home</a></li>
-                <li><a th:href="@{/movie}">Movies</a></li>
+                <li><a th:href="@{/movie}" class="nav-link">Movies</a></li>
                 <li><a th:href="@{/index}">Genres</a></li>
                 <li><a th:href="@{/profile}">Profile</a></li>
                 <li><a th:href="@{/admin}">Admin</a></li>
@@ -56,46 +57,34 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="block">
-                    <h1 class="wow fadeInDown">Movie Catalog</h1>
-                    <p class="wow fadeInDown" data-wow-delay="0.3s">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
-                    <div class="wow fadeInDown" data-wow-delay="0.3s">
-                        <a sec:authorize="!isAuthenticated()" class="btn btn-default btn-home" th:href="@{/login}" role="button">Log in</a>
-                        <a class="btn btn-default btn-home" th:href="@{/registration}" role="button">Registration</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 wow zoomIn">
-                <div class="block">
-                    <div class="counter text-center">
-                        <ul id="countdown_dashboard">
-                            <li>
-                                <div class="dash">
-                                    <div class="digit">0</div>
-                                    <div class="digit">0</div>
-                                    <div class="digit">0</div>
-                                    <span class="dash_title">Movie</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="dash ">
-                                    <div class="digit">0</div>
-                                    <div class="digit">0</div>
-                                    <span class="dash_title">Actors</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="dash ">
-                                    <div class="digit">0</div>
-                                    <div class="digit">0</div>
-                                    <span class="dash_title">Producers</span>
-                                </div>
-                            </li>
-                        </ul>
+                    <div class="caption">
+                        <h1 class="wow fadeInDown">Users</h1>
+                        <table class="table">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col"><p class="wow fadeInDown">ID</p></th>
+                                <th scope="col"><p class="wow fadeInDown">Username</p></th>
+                            </tr>
+                            </thead>
+                            <tr th:each="user : ${users}">
+                                <td th:text="${user.id}">...</td>
+                                <td th:text="${user.username}">...</td>
+
+
+                                <td><a href="#" th:href="@{'userProfileAdmin?userid='+ ${user.id}}">Profile</a></td>
+                                <td><a href="#" th:href="@{'/user/' + ${user.id} + '/show'}">Edit</a></td>
+                                <td><a href="#" th:href="@{'/user/' + ${user.id} + '/update'}">Role</a></td>
+                            </tr>
+                        </table>
+                        <div class="wow fadeInDown" data-wow-delay="0.3s">
+                            <a class="btn btn-default btn-home" th:href="@{/login}" role="button">Admin</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div><!-- .row close -->
     </div><!-- .container close -->
-</section><!-- header close -->
+</section>
 </body>
+</html>
 </html>
