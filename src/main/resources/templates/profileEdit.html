@@ -73,8 +73,8 @@
             <div class="col-md-6 wow zoomIn">
                 <div class="block">
                     <div class="counter text-center">
-                        <ul id="countdown_dashboard">
-                            <li><a th:href="@{/addAvatar}"><img class="img-responsive" align="photo">Profile photo</a></li>
+                        <ul id="countdown_dashboard" th:each = "user:${users}">
+                            <li><a th:href="@{/addAvatar}"><img class="img-responsive" align="photo" th:src="@{/img/}+${user.avatar}"></a></li>
                         </ul>
                     </div>
                 </div>
