@@ -56,16 +56,19 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="block">
-                    <div class="caption">
-                    <h1 class="wow fadeInDown">Information</h1>
-                    <ul th:each = "user:${users}">
-                        <p class="wow fadeInDown">Username:</p> <li th:utext="${user.username}"><p class="wow fadeInDown">...</p></li>
-                        <p class="wow fadeInDown">Realname:</p> <li th:utext="${user.realname}"><p class="wow fadeInDown">...</p></li>
-                        <p class="wow fadeInDown">Mail:</p>     <li th:utext="${user.mail}"><p class="wow fadeInDown">...</p></li>
-                    </ul>
+
+                        <div class="form">
+                            <form class="login-form" th:action="@{/profile/edit}" method="post">
+                                <ul th:each = "user:${users}">
+                                    <li><div><input type="text" th:placeholder="${user.username}" name="username" id="username"/></div></li>
+                                    <li><div><input type="text" th:placeholder="${user.realname}" name="realname" id="realname"/></div></li>
+                                    <li><div><input type="text" th:placeholder="${user.mail}" name="mail" id="mail"/></div></li>
+                                    <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                                    <button type="submit">Edit Save</button>
+                                </ul>
+                            </form>
+                        </div>
                 </div>
-                    <a th:href="@{/profile/edit}" class="btn btn-default btn-home">Edit</a>
-            </div>
             </div>
             <div class="col-md-6 wow zoomIn">
                 <div class="block">
