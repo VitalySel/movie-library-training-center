@@ -1,7 +1,11 @@
 package com.seliverstov.movier.controller;
 
+import com.seliverstov.movier.domain.Movie;
+import com.seliverstov.movier.domain.Producer;
 import com.seliverstov.movier.domain.Role;
 import com.seliverstov.movier.domain.User;
+import com.seliverstov.movier.repository.MovieRepository;
+import com.seliverstov.movier.repository.ProducerRepository;
 import com.seliverstov.movier.repository.UserRepository;
 import com.seliverstov.movier.service.UserService;
 import com.sun.org.apache.regexp.internal.RE;
@@ -12,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -21,6 +26,11 @@ public class AdminController {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private MovieRepository movieRepository;
+    @Autowired
+    private ProducerRepository producerRepository;
+
 
     @Autowired
     private UserService userService;
@@ -86,5 +96,42 @@ public class AdminController {
         return "redirect:/userList";
     }
 
+    @RequestMapping(value = {"/movieAdmin"},method = RequestMethod.GET)
+    public String movieAdmin(Model model) {
+        model.addAttribute("movies", movieRepository.findAll());
+        return "movieAdmin";
+    }
+
+    @RequestMapping(value = {"/addMovieAdmin"},method = RequestMethod.GET)
+        public String addMovieAdmin(Model model) {
+        return "addMovieAdmin";
+    }
+
+    @RequestMapping(value = {"/addMovie"},method = RequestMethod.POST)
+    public String addMovieAdminForm(@RequestParam String name, @RequestParam String releaseDate,
+                                    @RequestParam String description, @RequestParam String duration, @RequestParam String budget,@RequestParam Integer idProducer) {
+        Movie movie = new Movie(name,releaseDate,description,duration,budget,producerRepository.findById(idProducer));
+        movieRepository.save(movie);
+        return "redirect:/movieAdmin";
+    }
+
+
+    @RequestMapping(value = {"/producerAdmin"}, method = RequestMethod.GET)
+    public String producerAdmin(Model model) {
+        model.addAttribute("producers", producerRepository.findAll());
+        return "producerAdmin";
+    }
+
+    @RequestMapping(value = {"/addProducerAdmin"}, method = RequestMethod.GET)
+    public String addProducerAdmin(Model model) {
+        return "addProducerAdmin";
+    }
+
+    @RequestMapping(value = {"/addProducer"}, method = RequestMethod.POST)
+    public String addProducerAdminForm(@RequestParam String name, @RequestParam String country, @RequestParam String date) {
+        Producer producer = new Producer(name,country,date);
+        producerRepository.save(producer);
+        return "redirect:/producerAdmin";
+    }
 
 }

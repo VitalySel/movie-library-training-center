@@ -15,7 +15,7 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idmovies")
-    private Long id;
+    private int id;
 
     @Column(name = "movie_name")
     @NotNull
@@ -46,28 +46,34 @@ public class Movie {
     private Set<Actor> actors = new HashSet<>();
 
     @ManyToOne(optional = false,cascade = CascadeType.MERGE)
-    @JoinColumn(name = "idmovies",insertable = false, updatable = false)
+    @JoinColumn(name = "producer_id")
     private Producer producers;
 
     public Movie() {
     }
 
-    public Movie(String name, String releaseDate, String description, String duration, String budget, List<Genres> genres, Set<Actor> actors, Producer producers) {
+    public Movie(String name, String releaseDate, String description, String duration, String budget, Producer producers) {
         this.name = name;
         this.releaseDate = releaseDate;
         this.description = description;
         this.duration = duration;
         this.budget = budget;
-        this.genres = genres;
-        this.actors = actors;
         this.producers = producers;
     }
 
-    public Long getId() {
+    public Movie(String name, String releaseDate, String description, String duration, String budget) {
+        this.name = name;
+        this.releaseDate = releaseDate;
+        this.description = description;
+        this.duration = duration;
+        this.budget = budget;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

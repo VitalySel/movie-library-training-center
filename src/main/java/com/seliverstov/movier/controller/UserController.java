@@ -55,6 +55,7 @@ public class UserController {
     public String addAvatar() {
         return "addAvatar";
     }
+
     @PostMapping(value = "/addAvatar")
     public String addAvatarUser(@RequestParam ("file") MultipartFile file, @AuthenticationPrincipal User user) throws IOException {
         if (file != null && !file.getOriginalFilename().isEmpty()) {

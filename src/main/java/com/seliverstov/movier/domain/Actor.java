@@ -14,15 +14,11 @@ public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idactors", unique = true)
-    private Long id;
+    private int id;
 
     @Column(name = "name", length = 25)
     @NotNull
     private String name;
-
-    @Column(name = "surname", length = 25)
-    @NotNull
-    private String surname;
 
     @Column(name = "country", length = 25)
     private String country;
@@ -36,9 +32,8 @@ public class Actor {
     @ManyToMany(mappedBy = "actors")
     private List<Genres> genres = new ArrayList<>();
 
-    public Actor(String name, String surname, String country, String date, Set<Movie> movie, List<Genres> genres) {
+    public Actor(String name, String country, String date, Set<Movie> movie, List<Genres> genres) {
         this.name = name;
-        this.surname = surname;
         this.country = country;
         this.date = date;
         this.movie = movie;
@@ -49,11 +44,11 @@ public class Actor {
 
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -63,14 +58,6 @@ public class Actor {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     public String getCountry() {

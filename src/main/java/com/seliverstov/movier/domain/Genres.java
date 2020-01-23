@@ -12,7 +12,7 @@ public class Genres {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idgenres", unique = true)
-    private Long id;
+    private int id;
 
     @Column(name = "genre_name",unique = true, length = 25)
     @NotNull
@@ -42,11 +42,11 @@ public class Genres {
         this.actors = actors;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
