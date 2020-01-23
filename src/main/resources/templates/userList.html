@@ -64,20 +64,21 @@
                             <tr>
                                 <th scope="col"><p class="wow fadeInDown">ID</p></th>
                                 <th scope="col"><p class="wow fadeInDown">Username</p></th>
+                                <th scope="col"><p class="wow fadeInDown">Role</p></th>
                             </tr>
                             </thead>
                             <tr th:each="user : ${users}">
                                 <td th:text="${user.id}">...</td>
                                 <td th:text="${user.username}">...</td>
-
+                                <td th:text="${user.roles}">...</td>
 
                                 <td><a href="#" th:href="@{${user.id} + '/userProfileAdmin'}">Profile</a></td>
                                 <td><a href="#" th:href="@{${user.id} + '/userEditAdmin'}">Edit</a></td>
-                                <td><a href="#" th:href="@{'/user/' + ${user.id} + '/update'}">Role</a></td>
                             </tr>
                         </table>
                         <div class="wow fadeInDown" data-wow-delay="0.3s">
-                            <a class="btn btn-default btn-home" th:href="@{/login}" role="button">Admin</a>
+                            <a class="btn btn-default btn-home" th:href="@{/userMakeAdmin}" role="button">Make Admin</a>
+                            <a class="btn btn-default btn-home" th:href="@{/admin}" role="button">Admin Page</a>
                         </div>
                     </div>
                 </div>

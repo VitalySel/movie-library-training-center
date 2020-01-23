@@ -1,10 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html class="no-js">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Movier</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Fonts -->
+    <!-- Lato -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.css}">
+    <link rel="stylesheet" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+
+
+    <!-- Responsive Stylesheet -->
+    <link rel="stylesheet" th:href="@{/css/responsive.css}">
+</head>
+
+<body id="body">
+<div class="navbar-default navbar-fixed-top" id="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <h1>Movier</h1>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <nav class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav navbar-right" id="top-nav">
+                <li class="current"><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/index}">Movies</a></li>
+                <li><a th:href="@{/index}">Genres</a></li>
+                <li><a th:href="@{/index}">Contact</a></li>
+            </ul>
+        </nav><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<section id="hero-area">
+    <div class="container_login">
+        <div class="row">
+            <div class="title_forgot">
+                Admin Role User
+            </div>
+            <div class="login-page">
+                <div class="form">
+                    <form class="login-form" th:action="@{/makeAdmin}" method="post">
+                            <select size="5" class="custom-select" name="userid" id="userid">
+                                <th:block th:each ="user : ${users}">
+                                    <option th:value="@{${user.id}}" th:utext="${user.username}">...</option>
+                                </th:block>
+                            </select>
+                            <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                            <button type="submit" name="submit" >Edit</button>
+                        <p class="message">List users?<a th:href="@{/userList}">User</a></p>
+                    </form>
+                </div>
+            </div>
+        </div><!-- .row close -->
+    </div><!-- .container close -->
+</section><!-- header close -->
 </body>
 </html>

@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class AdminController {
@@ -61,10 +63,27 @@ public class AdminController {
         return  "redirect:"+userId+"/userProfileAdmin";
     }
 
-    @RequestMapping(value = {"{userid}/userMakeAdmin"},method = RequestMethod.GET)
-    public String userMakeAdmin(@PathVariable String userid, Model model) {
-        
-        return "redirect:"+userid+"/userProfileAdmin";
+    @RequestMapping(value = {"/userMakeAdmin"},method = RequestMethod.GET)
+    public String userMakeAdmin(Model model) throws NotFoundException {
+        List<User> users =new ArrayList<>(userRepository.findAll());
+        List<User> userNotAdmin =new ArrayList<>();
+        for (User user: users) {
+            Set userRoles = user.getRoles();
+            if (!userRoles.contains(Role.ADMIN)){
+                 userNotAdmin.add(user);
+            }
+        }
+        model.addAttribute("users", userNotAdmin);
+        return "userMakeAdmin";
+    }
+
+    @RequestMapping(value = {"/makeAdmin"},method = RequestMethod.POST)
+    public String makeAdmin(@RequestParam String userid, @RequestParam Map<String,String> form) throws NotFoundException {
+        User user = userService.getUserId(Long.valueOf(userid));
+        user.getRoles().add(Role.ADMIN);
+
+        userService.update(user);
+        return "redirect:/userList";
     }
 
 
