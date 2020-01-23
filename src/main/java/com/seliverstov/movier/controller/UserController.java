@@ -42,7 +42,7 @@ public class UserController {
         return "profileEdit";
     }
     @PostMapping(value = "/profile/edit")
-    public String editProfile(@RequestParam String username,String realname,String mail,String password, @AuthenticationPrincipal User user) {
+    public String editProfile(@RequestParam String username,String realname,String mail, @AuthenticationPrincipal User user) {
         User usr = user;
         usr.setRealname(realname);
         usr.setUsername(username);

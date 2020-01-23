@@ -66,7 +66,6 @@
                             <p class="wow fadeInDown">Role:</p>     <li th:each="role:${user.roles}"><p class="wow fadeInDown" th:utext="${role}">...</p></li>
                         </ul>
                     </div>
-                   <!-- <a th:href="@{/user/}+${user.id}" class="btn btn-default btn-home">Edit</a>-->
                 </div>
             </div>
             <div class="col-md-6 wow zoomIn">
@@ -76,6 +75,7 @@
                             <li><a th:href="@{/addAvatar}"><img class="img-responsive" align="photo" th:src="@{/img/}+${user.avatar}"></a></li>
                         </ul>
                     </div>
+                    <a th:href="@{/userList}" class="btn btn-default btn-home">User List</a>
                 </div>
             </div>
         </div><!-- .row close -->
