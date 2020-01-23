@@ -7,6 +7,7 @@ import com.seliverstov.movier.domain.User;
 import com.seliverstov.movier.repository.MovieRepository;
 import com.seliverstov.movier.repository.ProducerRepository;
 import com.seliverstov.movier.repository.UserRepository;
+import com.seliverstov.movier.service.MovieService;
 import com.seliverstov.movier.service.UserService;
 import com.sun.org.apache.regexp.internal.RE;
 import javassist.NotFoundException;
@@ -34,6 +35,8 @@ public class AdminController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private MovieService movieService;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -133,5 +136,14 @@ public class AdminController {
         producerRepository.save(producer);
         return "redirect:/producerAdmin";
     }
+
+
+    @RequestMapping(value = {"{movieid}/movierInfoAdmin"}, method = RequestMethod.GET)
+    public String getMovieInfoAdmin(@PathVariable String movieid, Model model) throws NotFoundException {
+        Movie movie = movieService.getMovieId(Integer.parseInt(movieid));
+        model.addAttribute("movies",movie);
+        return "movierInfoAdmin";
+    }
+
 
 }
