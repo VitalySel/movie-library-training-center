@@ -3,6 +3,7 @@ package com.seliverstov.movier.service;
 import com.seliverstov.movier.domain.Role;
 import com.seliverstov.movier.domain.User;
 import com.seliverstov.movier.repository.UserRepository;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -35,6 +37,17 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException("Could not find user with name '" + username + "'");
         }
         return user;
+    }
+
+    public User getUserId(Long id) throws NotFoundException {
+
+        Optional<User> optionalUser = userRepo.findById(id);
+
+        if (!optionalUser.isPresent()) {
+            throw new NotFoundException("User not found with id - " + id);
+        }
+
+        return optionalUser.get();
     }
 
     public void addUser(User user){

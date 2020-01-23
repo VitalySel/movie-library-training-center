@@ -59,7 +59,6 @@
                     <div class="caption">
                         <h1 class="wow fadeInDown">Information User</h1>
                         <ul th:each = "user:${users}">
-                            <p class="wow fadeInDown">ID:</p>     <li th:utext="${user.id}"><p class="wow fadeInDown">...</p></li>
                             <p class="wow fadeInDown">Username:</p> <li th:utext="${user.username}"><p class="wow fadeInDown">...</p></li>
                             <p class="wow fadeInDown">Realname:</p> <li th:utext="${user.realname}"><p class="wow fadeInDown">...</p></li>
                             <p class="wow fadeInDown">Mail:</p>     <li th:utext="${user.mail}"><p class="wow fadeInDown">...</p></li>
@@ -67,7 +66,7 @@
                             <p class="wow fadeInDown">Role:</p>     <li th:each="role:${user.roles}"><p class="wow fadeInDown" th:utext="${role}">...</p></li>
                         </ul>
                     </div>
-                    <a th:href="@{/user/}+${user.id}" class="btn btn-default btn-home">Edit</a>
+                   <!-- <a th:href="@{/user/}+${user.id}" class="btn btn-default btn-home">Edit</a>-->
                 </div>
             </div>
             <div class="col-md-6 wow zoomIn">

@@ -5,6 +5,7 @@ import com.seliverstov.movier.domain.User;
 import com.seliverstov.movier.repository.UserRepository;
 import com.seliverstov.movier.service.UserService;
 import com.sun.org.apache.regexp.internal.RE;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -34,9 +35,10 @@ public class AdminController {
         return "userList";
     }
 
-    @RequestMapping(value = {"/userProfileAdmin"}, method = RequestMethod.GET)
-    public String getUserProfileAdmin(@RequestParam String userid, Model model){
-        model.addAttribute("users", userid);
+    @RequestMapping(value = {"{userid}/userProfileAdmin"}, method = RequestMethod.GET)
+    public String getUserProfileAdmin(@PathVariable String userid, Model model) throws NotFoundException {
+        User user = userService.getUserId(Long.valueOf(userid));
+        model.addAttribute("users", user);
         return "userProfileAdmin";
     }
 

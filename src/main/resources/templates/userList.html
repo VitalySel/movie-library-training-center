@@ -71,7 +71,7 @@
                                 <td th:text="${user.username}">...</td>
 
 
-                                <td><a href="#" th:href="@{'userProfileAdmin?userid='+ ${user.id}}">Profile</a></td>
+                                <td><a href="#" th:href="@{${user.id} + '/userProfileAdmin'}">Profile</a></td>
                                 <td><a href="#" th:href="@{'/user/' + ${user.id} + '/show'}">Edit</a></td>
                                 <td><a href="#" th:href="@{'/user/' + ${user.id} + '/update'}">Role</a></td>
                             </tr>
