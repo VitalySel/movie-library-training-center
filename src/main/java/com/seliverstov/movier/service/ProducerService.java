@@ -7,6 +7,8 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,6 +25,14 @@ public class ProducerService {
             throw new NotFoundException("Producer not found with id - " + id);
         }
         return optionalProducer.get();
+    }
+
+    public Integer getIdProducerName(String name) throws NotFoundException {
+        Producer producer = produserRepository.findByName(name);
+        if (producer == null){
+            throw new NotFoundException("Producer not found with name - "+ name);
+        }
+        return producer.getId();
     }
 
     public void update(Producer producer) {

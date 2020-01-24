@@ -57,17 +57,18 @@
         <div class="row">
             <div class="login-page">
                 <div class="form">
-                    <form class="login-form" th:action="@{/addMovie}" method="post">
-                        <div><input type="text" placeholder="name" name="name" id="name"/></div>
-                        <div><input type="text" placeholder="releaseDate" name="releaseDate" id="releaseDate"/></div>
-                        <div><input type="text" placeholder="description" name="description" id="description"/></div>
-                        <div><input type="text" placeholder="duration" name="duration" id="duration"/></div>
-                        <div><input type="text" placeholder="budget" name="budget" id="budget"/></div>
-                        <div><div class="bgw"><input type="text" name="producerName" id="producerName"/></div></div>
+                    <form class="login-form" th:action="@{/addMovieActor}" method="post">
+                        <ul th:each = "movie:${movies}">
+                            <li th:utext="${movie.name}">...</li>
+                            </br>
+                        <div><div class="bgw"><input type="text" placeholder="enter actor(s) separate by comma " name="actorName" id="actorName"/></div></div>
                         <input type="hidden" name="_csrf" value="${_csrf.token}" />
-                        <button type="submit">Add Movie</button>
+                        <input type="hidden" th:value="@{${movie.id}}" name="movieId">
+                        <button type="submit">Add Actors</button>
+                        <p class="message">Actor List?<a th:href="@{/actorAdmin}">Actors</a></p>
                         <p class="message">Movie List?<a th:href="@{/movieAdmin}">Movies</a></p>
                         <p class="message">Admin page?<a th:href="@{/admin}">Admin</a></p>
+                        </ul>
                     </form>
                 </div>
             </div>

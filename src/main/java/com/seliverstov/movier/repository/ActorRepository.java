@@ -11,6 +11,7 @@ import java.util.List;
 public interface ActorRepository extends JpaRepository<Actor, Long> {
 
     Actor findById(int id);
+    Actor findByName(String name);
 
     List<Actor> findByMovie(Movie movie);
 }

@@ -29,6 +29,10 @@ public class Actor {
     @ManyToMany(mappedBy = "actors")
     private Set<Movie> movie = new HashSet<>();
 
+    /*public void addMovie(Movie mov) {
+        movie.add(mov);
+    }*/
+
     @ManyToMany(mappedBy = "actors")
     private List<Genres> genres = new ArrayList<>();
 

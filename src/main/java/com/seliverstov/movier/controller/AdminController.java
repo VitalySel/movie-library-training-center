@@ -118,8 +118,8 @@ public class AdminController {
 
     @RequestMapping(value = {"/addMovie"},method = RequestMethod.POST)
     public String addMovieAdminForm(@RequestParam String name, @RequestParam String releaseDate,
-                                    @RequestParam String description, @RequestParam String duration, @RequestParam String budget,@RequestParam Integer idProducer) {
-        Movie movie = new Movie(name,releaseDate,description,duration,budget,producerRepository.findById(idProducer));
+                                    @RequestParam String description, @RequestParam String duration, @RequestParam String budget,@RequestParam String producerName) {
+        Movie movie = new Movie(name,releaseDate,description,duration,budget,producerRepository.findByName(producerName));
         movieRepository.save(movie);
         return "redirect:/movieAdmin";
     }
@@ -234,6 +234,24 @@ public class AdminController {
         actorService.save(actor);
         return "redirect:" + actorId + "/actorInfoAdmin";
     }
+
+    @RequestMapping(value = {"{movieid}/addMovieActor"}, method = RequestMethod.GET)
+    public String addMovieActor(@PathVariable String movieid, Model model) throws NotFoundException {
+        Movie movie = movieService.getMovieId(Integer.parseInt(movieid));
+        model.addAttribute("movies",movie);
+        return "addMovieActor";
+    }
+
+    @RequestMapping(value = {"addMovieActor"}, method = RequestMethod.POST)
+    public String addMovieActorForm(@RequestParam String movieId, @RequestParam String actorName) throws NotFoundException {
+        List<String> actorNameInput = Arrays.asList(actorName.split(","));
+        Movie movie = movieService.getMovieId(Integer.parseInt(movieId));
+        movie.setActors(actorService.findActorName(actorNameInput));
+        movieService.update(movie);
+        return "redirect:" + movieId + "/movierInfoAdmin";
+    }
+
+
 
 
 }

@@ -6,7 +6,7 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class MovieService {
@@ -23,6 +23,8 @@ public class MovieService {
         }
         return optionalMovie.get();
     }
+
+
 
     public void update(Movie movie) {
         movieRepository.save(movie);
