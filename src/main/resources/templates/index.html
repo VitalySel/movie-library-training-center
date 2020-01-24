@@ -30,13 +30,16 @@
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <h1>Movier</h1>
+            <a class="navbar-brand" href="@{/index}">
+                <h1 class="logo-1">Movier</h1>
+                <h2 class="logo-2 black">Movier</h2>
+            </a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <nav class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav navbar-right" id="top-nav">
-                <li class="current"><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/}">Home</a></li>
                 <li><a th:href="@{/movie}">Movies</a></li>
                 <li><a th:href="@{/index}">Genres</a></li>
                 <li><a th:href="@{/profile}">Profile</a></li>
@@ -57,7 +60,11 @@
             <div class="col-md-6">
                 <div class="block">
                     <h1 class="wow fadeInDown">Movie Catalog</h1>
-                    <p class="wow fadeInDown" data-wow-delay="0.3s">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
+                    <p class="wow fadeInDown" data-wow-delay="0.3s">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
                     <div class="wow fadeInDown" data-wow-delay="0.3s">
                         <a sec:authorize="!isAuthenticated()" class="btn btn-default btn-home" th:href="@{/login}" role="button">Log in</a>
                         <a class="btn btn-default btn-home" th:href="@{/registration}" role="button">Registration</a>
@@ -70,23 +77,19 @@
                         <ul id="countdown_dashboard">
                             <li>
                                 <div class="dash">
-                                    <div class="digit">0</div>
-                                    <div class="digit">0</div>
-                                    <div class="digit">0</div>
-                                    <span class="dash_title">Movie</span>
+                                    <div>0</div>
+                                    <span>Movie</span>
                                 </div>
                             </li>
                             <li>
                                 <div class="dash ">
-                                    <div class="digit">0</div>
-                                    <div class="digit">0</div>
+                                    <div class="">0</div>
                                     <span class="dash_title">Actors</span>
                                 </div>
                             </li>
                             <li>
                                 <div class="dash ">
-                                    <div class="digit">0</div>
-                                    <div class="digit">0</div>
+                                    <div class="">0</div>
                                     <span class="dash_title">Producers</span>
                                 </div>
                             </li>
@@ -97,5 +100,20 @@
         </div><!-- .row close -->
     </div><!-- .container close -->
 </section><!-- header close -->
+
+
+<script th:src="@{/js/vendor/modernizr-2.6.2.min.js}"></script>
+<script th:src="@{/js/vendor/jquery-1.10.2.min.js}"></script>
+<script th:src="@{/js/jquery.lwtCountdown-1.0.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/jquery.validate.min.js}"></script>
+<script th:src="@{/js/jquery.form.js}"></script>
+<script th:src="@{/js/jquery.nav.js}"></script>
+<script th:src="@{/js/jquery.sticky.js}"></script>
+<script th:src="@{/js/plugins.js}"></script>
+<script th:src="@{/js/wow.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+
 </body>
 </html>

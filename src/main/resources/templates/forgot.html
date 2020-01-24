@@ -34,13 +34,16 @@
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <h1>Movier</h1>
+            <a class="navbar-brand" href="@{/}">
+                <h1 class="logo-1">Movier</h1>
+                <h2 class="logo-2 black">Movier</h2>
+            </a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <nav class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav navbar-right" id="top-nav">
-                <li class="current"><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/}">Home</a></li>
                 <li><a th:href="@{/index}">Movies</a></li>
                 <li><a th:href="@{/index}">Genres</a></li>
                 <li><a th:href="@{/index}">Contact</a></li>
@@ -67,5 +70,18 @@
         </div><!-- .row close -->
     </div><!-- .container close -->
 </section><!-- header close -->
+<script th:src="@{/js/vendor/modernizr-2.6.2.min.js}"></script>
+<script th:src="@{/js/vendor/jquery-1.10.2.min.js}"></script>
+<script th:src="@{/js/jquery.lwtCountdown-1.0.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/jquery.validate.min.js}"></script>
+<script th:src="@{/js/jquery.form.js}"></script>
+<script th:src="@{/js/jquery.nav.js}"></script>
+<script th:src="@{/js/jquery.sticky.js}"></script>
+<script th:src="@{/js/plugins.js}"></script>
+<script th:src="@{/js/wow.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+
 </body>
 </html>
