@@ -45,8 +45,8 @@ public class Movie {
             inverseJoinColumns = {@JoinColumn(name = "actor_idactors",referencedColumnName = "idactors")})
     private Set<Actor> actors = new HashSet<>();
 
-    @ManyToOne(optional = false,cascade = CascadeType.MERGE)
-    @JoinColumn(name = "producer_id")
+    @ManyToOne(optional = false,cascade = CascadeType.ALL)
+    @JoinColumn(name = "movies")
     private Producer producers;
 
     public Movie() {

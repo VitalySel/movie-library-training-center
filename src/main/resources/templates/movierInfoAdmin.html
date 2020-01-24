@@ -63,8 +63,7 @@
                             <p class="wow fadeInDown">Release:</p> <li th:utext="${movie.releaseDate}"><p class="wow fadeInDown">...</p></li>
                             <p class="wow fadeInDown">Description:</p>     <li th:utext="${movie.description}"><p class="wow fadeInDown">...</p></li>
                             <p class="wow fadeInDown">Duration:</p>     <li th:utext="${movie.duration}"><p class="wow fadeInDown">...</p></li>
-                            <p class="wow fadeInDown">Box Office:</p>     <li th:utext="${movie.budget}"><p class="wow fadeInDown">...</p></li>
-                            <p class="wow fadeInDown">Producer:</p>     <li th:utext="${movie.producers}"><p class="wow fadeInDown">...</p></li>
+                            <p class="wow fadeInDown">Box Office:</p>     <li th:utext="${movie.budget + '$'}"><p class="wow fadeInDown">...</p></li>
                         </ul>
                     </div>
                 </div>
@@ -72,8 +71,10 @@
             <div class="col-md-6 wow zoomIn">
                 <div class="block">
                     <div class="counter text-center">
-                        <ul id="countdown_dashboard" th:each = "movie:${movies}">
-                            <!--<li><a th:href="@{/addMovieImg}"><img class="img-responsive" align="photo" th:src="@{/img/}+${movie.image}"></a></li>-->
+                        <ul th:each = "movie:${movies}">
+                            <p class="wow fadeInDown">Poster:</p><li>Poster</li><!--<li><a th:href="@{/addMovieImg}"><img class="img-responsive" align="photo" th:src="@{/img/}+${movie.image}"></a></li>-->
+                            <p class="wow fadeInDown">Producer:</p>   <li th:utext="${movie.producers.getName()}"><p class="wow fadeInDown">...</p></li>
+                            <p class="wow fadeInDown">Actors:</p> <li>Actors</li>
                         </ul>
                     </div>
                     <a th:href="@{/movieAdmin}" class="btn btn-default btn-home">Movie List</a>
