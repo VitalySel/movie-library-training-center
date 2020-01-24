@@ -41,11 +41,11 @@ public class Producer {
         this.date = date;
     }
 
-    public int getIdProducers() {
+    public int getId() {
         return id;
     }
 
-    public void setIdProducers(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 

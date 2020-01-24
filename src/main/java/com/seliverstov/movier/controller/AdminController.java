@@ -8,6 +8,7 @@ import com.seliverstov.movier.repository.MovieRepository;
 import com.seliverstov.movier.repository.ProducerRepository;
 import com.seliverstov.movier.repository.UserRepository;
 import com.seliverstov.movier.service.MovieService;
+import com.seliverstov.movier.service.ProducerService;
 import com.seliverstov.movier.service.UserService;
 import com.sun.org.apache.regexp.internal.RE;
 import javassist.NotFoundException;
@@ -37,6 +38,8 @@ public class AdminController {
     private UserService userService;
     @Autowired
     private MovieService movieService;
+    @Autowired
+    private ProducerService producerService;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -164,5 +167,28 @@ public class AdminController {
         return  "redirect:"+movieId+"/movierInfoAdmin";
     }
 
+    @RequestMapping(value = {"{producerid}/producerInfoAdmin"}, method = RequestMethod.GET)
+    public String getProducerInfoAdmin(@PathVariable String producerid, Model model) throws NotFoundException {
+        Producer producer = producerService.getProducerId(Integer.parseInt(producerid));
+        model.addAttribute("producers", producer);
+        return "producerInfoAdmin";
+    }
+
+    @RequestMapping(value = {"{producerid}/producerEditAdmin"}, method = RequestMethod.GET)
+    public String getProducerEditAdmin(@PathVariable String producerid, Model model) throws NotFoundException {
+        Producer producer = producerService.getProducerId(Integer.parseInt(producerid));
+        model.addAttribute("producers",producer);
+        return "producerEditAdmin";
+    }
+
+    @RequestMapping(value = "producerEdit", method = RequestMethod.POST)
+    public String getProducerEditAdminForm(@RequestParam String name, String country, String date, @RequestParam String producerId) throws NotFoundException {
+        Producer producer = producerService.getProducerId(Integer.parseInt(producerId));
+        producer.setName(name);
+        producer.setCountry(country);
+        producer.setDate(date);
+        producerService.update(producer);
+        return "redirect:" + producerId + "/producerInfoAdmin";
+    }
 
 }

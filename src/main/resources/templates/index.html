@@ -30,7 +30,7 @@
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="@{/index}">
+            <a class="navbar-brand" th:href="@{/}">
                 <h1 class="logo-1">Movier</h1>
                 <h2 class="logo-2 black">Movier</h2>
             </a>
@@ -63,8 +63,7 @@
                     <p class="wow fadeInDown" data-wow-delay="0.3s">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
+                       </p>
                     <div class="wow fadeInDown" data-wow-delay="0.3s">
                         <a sec:authorize="!isAuthenticated()" class="btn btn-default btn-home" th:href="@{/login}" role="button">Log in</a>
                         <a class="btn btn-default btn-home" th:href="@{/registration}" role="button">Registration</a>
