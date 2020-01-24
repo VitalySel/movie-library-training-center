@@ -40,8 +40,21 @@ public class Actor {
         this.genres = genres;
     }
 
+    public Actor(String name, String country, String date, Set<Movie> movie) {
+        this.name = name;
+        this.country = country;
+        this.date = date;
+        this.movie = movie;
+    }
+
     public Actor() {
 
+    }
+
+    public Actor(String name, String country, String date) {
+        this.name = name;
+        this.country = country;
+        this.date = date;
     }
 
     public int getId() {

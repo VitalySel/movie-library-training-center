@@ -59,46 +59,29 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="block">
-                    <div class="caption">
-                        <h1 class="wow fadeInDown">Admin Page</h1>
-                        <div class="wow fadeInDown" data-wow-delay="0.3s">
-                            <a class="btn btn-default btn-home" th:href="@{/userList}" role="button">User List</a>
-                            <a class="btn btn-default btn-home" th:href="@{/movieAdmin}" role="button">Movie List</a>
-                        </div>
-                        <div class="wow fadeInDown" data-wow-delay="0.3s">
-                            <a class="btn btn-default btn-home" th:href="@{/producerAdmin}" role="button">Producers List</a>
-                            <a class="btn btn-default btn-home" th:href="@{/actorAdmin}" role="button">Actors List</a>
-                        </div>
-                        <div class="wow fadeInDown" data-wow-delay="0.3s">
-                            <a class="btn btn-default btn-home" th:href="@{/registration}" role="button">Parsing</a>
-                        </div>
+
+                    <div class="form">
+                        <form class="login-form" th:action="@{/actorEdit}" method="post">
+                            <ul th:each = "actor:${actors}">
+                                <li><div><input type="text" th:placeholder="${actor.name}" name="name" id="name"/></div></li>
+                                <li><div><input type="text" th:placeholder="${actor.country}" name="country" id="country"/></div></li>
+                                <li><div><input type="text" th:placeholder="${actor.date}" name="date" id="date"/></div></li>
+                                <input type="hidden" th:value="@{${actor.id}}" name="actorId">
+                                <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                                <button type="submit">Edit Save</button>
+                            </ul>
+                        </form>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 wow zoomIn">
                 <div class="block">
                     <div class="counter text-center">
-                        <ul id="countdown_dashboard">
-                            <li>
-                                <div class="dash">
-                                    <div>0</div>
-                                    <span class="dash_title">Users</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="dash ">
-                                    <div>0</div>
-                                    <span class="dash_title">Admin</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="dash ">
-                                    <div>0</div>
-                                    <span class="dash_title">Movie</span>
-                                </div>
-                            </li>
+                        <ul id="countdown_dashboard" th:each = "actor:${actors}">
+                            <!-- <li><a th:href="@{/addAvatar}"><img class="img-responsive" align="photo" th:src="@{/img/}+${user.avatar}"></a></li>-->
                         </ul>
                     </div>
+                    <a th:href="@{/actorAdmin}" class="btn btn-default btn-home">Actor List</a>
                 </div>
             </div>
         </div><!-- .row close -->

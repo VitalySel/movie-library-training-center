@@ -1,12 +1,11 @@
 package com.seliverstov.movier.controller;
 
-import com.seliverstov.movier.domain.Movie;
-import com.seliverstov.movier.domain.Producer;
-import com.seliverstov.movier.domain.Role;
-import com.seliverstov.movier.domain.User;
+import com.seliverstov.movier.domain.*;
+import com.seliverstov.movier.repository.ActorRepository;
 import com.seliverstov.movier.repository.MovieRepository;
 import com.seliverstov.movier.repository.ProducerRepository;
 import com.seliverstov.movier.repository.UserRepository;
+import com.seliverstov.movier.service.ActorService;
 import com.seliverstov.movier.service.MovieService;
 import com.seliverstov.movier.service.ProducerService;
 import com.seliverstov.movier.service.UserService;
@@ -32,6 +31,8 @@ public class AdminController {
     private MovieRepository movieRepository;
     @Autowired
     private ProducerRepository producerRepository;
+    @Autowired
+    private ActorRepository actorRepository;
 
 
     @Autowired
@@ -40,6 +41,8 @@ public class AdminController {
     private MovieService movieService;
     @Autowired
     private ProducerService producerService;
+    @Autowired
+    private ActorService actorService;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -190,5 +193,47 @@ public class AdminController {
         producerService.update(producer);
         return "redirect:" + producerId + "/producerInfoAdmin";
     }
+
+    @RequestMapping(value = "/actorAdmin",method = RequestMethod.GET)
+    public String actorAdmin(Model model){
+        model.addAttribute("actors", actorRepository.findAll());
+        return "actorAdmin";
+    }
+
+    @RequestMapping(value = "{actorid}/actorInfoAdmin",method = RequestMethod.GET)
+    public String getActorInfoAdmin(@PathVariable String actorid, Model model) throws NotFoundException {
+        Actor actor = actorService.getActorId(Integer.parseInt(actorid));
+        model.addAttribute("actors", actor);
+        return "actorInfoAdmin";
+    }
+
+    @RequestMapping(value = "addActorAdmin", method = RequestMethod.GET)
+    public String addActorAdmin() {
+        return "addActorAdmin";
+    }
+    @RequestMapping(value = {"/addActor"}, method = RequestMethod.POST)
+    public String addActorAdminForm(@RequestParam String name, @RequestParam String country, @RequestParam String date) {
+        Actor actor = new Actor(name,country,date);
+        actorRepository.save(actor);
+        return "redirect:/actorAdmin";
+    }
+
+    @RequestMapping(value = {"{actorid}/actorEditAdmin"}, method = RequestMethod.GET)
+    public String getActorEditAdmin(@PathVariable String actorid, Model model) throws NotFoundException {
+        Actor actor = actorService.getActorId(Integer.parseInt(actorid));
+        model.addAttribute("actors",actor);
+        return "actorEditAdmin";
+    }
+
+    @RequestMapping(value = "actorEdit", method = RequestMethod.POST)
+    public String getActorEditAdminForm(@RequestParam String name, String country, String date, @RequestParam String actorId) throws NotFoundException {
+        Actor actor = actorService.getActorId(Integer.parseInt(actorId));
+        actor.setName(name);
+        actor.setCountry(country);
+        actor.setDate(date);
+        actorService.save(actor);
+        return "redirect:" + actorId + "/actorInfoAdmin";
+    }
+
 
 }
