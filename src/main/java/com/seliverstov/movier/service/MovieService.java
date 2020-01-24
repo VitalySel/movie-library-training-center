@@ -23,4 +23,8 @@ public class MovieService {
         }
         return optionalMovie.get();
     }
+
+    public void update(Movie movie) {
+        movieRepository.save(movie);
+    }
 }

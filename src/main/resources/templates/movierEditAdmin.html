@@ -58,12 +58,14 @@
                 <div class="block">
 
                     <div class="form">
-                        <form class="login-form" th:action="@{/userEdit}" method="post">
-                            <ul th:each = "user:${users}">
-                                <li><div><input type="text" th:placeholder="${user.username}" name="username" id="username"/></div></li>
-                                <li><div><input type="text" th:placeholder="${user.realname}" name="realname" id="realname"/></div></li>
-                                <li><div><input type="text" th:placeholder="${user.mail}" name="mail" id="mail"/></div></li>
-                                <input type="hidden" th:value="@{${user.id}}" name="userId">
+                        <form class="login-form" th:action="@{/movieEdit}" method="post">
+                            <ul th:each = "movie:${movies}">
+                                <li><div><input type="text" th:placeholder="${movie.name}" name="name" id="name"/></div></li>
+                                <li><div><input type="text" th:placeholder="${movie.releaseDate}" name="releaseDate" id="releaseDate"/></div></li>
+                                <li><div><input type="text" th:placeholder="${movie.description}" name="description" id="description"/></div></li>
+                                <li><div><input type="text" th:placeholder="${movie.duration}" name="duration" id="duration"/></div></li>
+                                <li><div><input type="text" th:placeholder="${movie.budget}" name="budget" id="budget"/></div></li>
+                                <input type="hidden" th:value="@{${movie.id}}" name="movieId">
                                 <input type="hidden" name="_csrf" value="${_csrf.token}" />
                                 <button type="submit">Edit Save</button>
                             </ul>
@@ -74,11 +76,11 @@
             <div class="col-md-6 wow zoomIn">
                 <div class="block">
                     <div class="counter text-center">
-                        <ul id="countdown_dashboard" th:each = "user:${users}">
-                            <li><a th:href="@{/addAvatar}"><img class="img-responsive" align="photo" th:src="@{/img/}+${user.avatar}"></a></li>
+                        <ul id="countdown_dashboard" th:each = "movie:${movies}">
+                           <!-- <li><a th:href="@{/addAvatar}"><img class="img-responsive" align="photo" th:src="@{/img/}+${user.avatar}"></a></li>-->
                         </ul>
                     </div>
-                    <a th:href="@{/userList}" class="btn btn-default btn-home">User List</a>
+                    <a th:href="@{/movieAdmin}" class="btn btn-default btn-home">Movie List</a>
                 </div>
             </div>
         </div><!-- .row close -->

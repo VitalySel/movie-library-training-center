@@ -145,5 +145,24 @@ public class AdminController {
         return "movierInfoAdmin";
     }
 
+    @RequestMapping(value = {"{movieid}/movierEditAdmin"}, method = RequestMethod.GET)
+    public String getMovieEditAdmin(@PathVariable String movieid, Model model) throws NotFoundException {
+        Movie movie = movieService.getMovieId(Integer.parseInt(movieid));
+        model.addAttribute("movies",movie);
+        return "movierEditAdmin";
+    }
+
+    @RequestMapping(value = "movieEdit" ,method = RequestMethod.POST)
+    public String getMovieEditAdminForm(@RequestParam String name, String releaseDate,String description, String duration, String budget, @RequestParam String movieId) throws NotFoundException {
+        Movie movie = movieService.getMovieId(Integer.parseInt(movieId));
+        movie.setName(name);
+        movie.setReleaseDate(releaseDate);
+        movie.setDescription(description);
+        movie.setDuration(duration);
+        movie.setBudget(budget);
+        movieService.update(movie);
+        return  "redirect:"+movieId+"/movierInfoAdmin";
+    }
+
 
 }

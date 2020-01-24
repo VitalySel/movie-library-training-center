@@ -72,9 +72,9 @@
                 <div class="block">
                     <div class="counter text-center">
                         <ul th:each = "movie:${movies}">
-                            <p class="wow fadeInDown">Poster:</p><li>Poster</li><!--<li><a th:href="@{/addMovieImg}"><img class="img-responsive" align="photo" th:src="@{/img/}+${movie.image}"></a></li>-->
-                            <p class="wow fadeInDown">Producer:</p>   <li th:utext="${movie.producers.getName()}"><p class="wow fadeInDown">...</p></li>
-                            <p class="wow fadeInDown">Actors:</p> <li>Actors</li>
+                            <p class="wow fadeInDown">Poster:</p>       <li>Poster</li><!--<li><a th:href="@{/addMovieImg}"><img class="img-responsive" align="photo" th:src="@{/img/}+${movie.image}"></a></li>-->
+                            <p class="wow fadeInDown">Producer:</p>     <li th:utext="${movie.producers.getName()}"><p class="wow fadeInDown">...</p></li>
+                            <p class="wow fadeInDown">Actors:</p>       <li>Actors</li>
                         </ul>
                     </div>
                     <a th:href="@{/movieAdmin}" class="btn btn-default btn-home">Movie List</a>
