@@ -21,7 +21,10 @@
     <link rel="stylesheet" th:href="@{/css/owl.carousel.css}">
     <link rel="stylesheet" th:href="@{/css/animate.css}">
     <link rel="stylesheet" th:href="@{/css/main.css}">
+
     <link rel="stylesheet" th:href="@{/css/login.css}">
+
+
     <!-- Responsive Stylesheet -->
     <link rel="stylesheet" th:href="@{/css/responsive.css}">
 </head>
@@ -41,70 +44,31 @@
         <nav class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav navbar-right" id="top-nav">
                 <li><a th:href="@{/}">Home</a></li>
-                <li><a th:href="@{/movie}" class="nav-link">Movies</a></li>
+                <li><a th:href="@{/index}">Movies</a></li>
                 <li><a th:href="@{/index}">Genres</a></li>
-                <li><a th:href="@{/profile}">Profile</a></li>
-                <li sec:authorize="isAuthenticated()">
-                    <form th:action="@{/logout}" method="post">
-                        <input type="submit" class="btn btn-default navbar-btn" value="Sign Out" />
-                    </form>
-                </li>
+                <li><a th:href="@{/index}">Contact</a></li>
             </ul>
         </nav><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </div>
 
 <section id="hero-area">
-    <div class="container">
+    <div class="container_login">
         <div class="row">
-            <div class="col-md-6">
-                <div class="block">
-                    <div class="caption">
-                        <h1 class="wow fadeInDown">Admin Page</h1>
-                        <div class="wow fadeInDown" data-wow-delay="0.3s">
-                            <a class="btn btn-default btn-home" th:href="@{/userList}" role="button">User List</a>
-                            <a class="btn btn-default btn-home" th:href="@{/movieAdmin}" role="button">Movie List</a>
-                        </div>
-                        <div class="wow fadeInDown" data-wow-delay="0.3s">
-                            <a class="btn btn-default btn-home" th:href="@{/producerAdmin}" role="button">Producers List</a>
-                            <a class="btn btn-default btn-home" th:href="@{/actorAdmin}" role="button">Actors List</a>
-                        </div>
-                        <div class="wow fadeInDown" data-wow-delay="0.3s">
-                            <a class="btn btn-default btn-home" th:href="@{/genresAdmin}" role="button">Genres List</a>
-                            <a class="btn btn-default btn-home" th:href="@{/registration}" role="button">Parsing</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 wow zoomIn">
-                <div class="block">
-                    <div class="counter text-center">
-                        <ul id="countdown_dashboard">
-                            <li>
-                                <div class="dash">
-                                    <div>0</div>
-                                    <span class="dash_title">Users</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="dash ">
-                                    <div>0</div>
-                                    <span class="dash_title">Admin</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="dash ">
-                                    <div>0</div>
-                                    <span class="dash_title">Movie</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="login-page">
+                <div class="form">
+                    <form class="login-form" th:action="@{/addGenre}" method="post">
+                        <div><input type="text" placeholder="name" name="name" id="name"/></div>
+                        <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                        <button type="submit">Add Genre</button>
+                        <p class="message">Genres List?<a th:href="@{/genresAdmin}">Genres</a></p>
+                        <p class="message">Admin page?<a th:href="@{/admin}">Admin</a></p>
+                    </form>
                 </div>
             </div>
         </div><!-- .row close -->
     </div><!-- .container close -->
-</section>
+</section><!-- header close -->
 
 <footer>
     <div class="container">
@@ -132,5 +96,4 @@
 <script th:src="@{/js/main.js}"></script>
 
 </body>
-</html>
 </html>

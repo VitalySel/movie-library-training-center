@@ -26,11 +26,20 @@ public class Producer {
     @Column(name = "producer_date")
     private String date;
 
+    @Column(name = "producer_photo")
+    private String photo;
+
     @OneToMany(mappedBy = "producers")
     private Set<Movie> movies = new HashSet<>();
 
-    @ManyToMany(mappedBy = "producers")
-    private List<Genres> genres = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(name = "producers_genres",
+            joinColumns = {@JoinColumn(name = "producer_idproducers",referencedColumnName = "idproducers")},
+            inverseJoinColumns = {@JoinColumn(name = "genres_idgenres",referencedColumnName = "idgenres")})
+    private Set<Genres> genres = new HashSet<>();
+
+   /* @ManyToMany(mappedBy = "producers")
+    private List<Genres> genres = new ArrayList<>();*/
 
     public Producer(){
     }
@@ -81,11 +90,19 @@ public class Producer {
         this.movies = movies;
     }
 
-    public List<Genres> getGenres() {
+    public Set<Genres> getGenres() {
         return genres;
     }
 
-    public void setGenres(List<Genres> genres) {
+    public void setGenres(Set<Genres> genres) {
         this.genres = genres;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

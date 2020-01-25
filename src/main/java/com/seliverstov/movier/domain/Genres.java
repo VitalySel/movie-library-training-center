@@ -21,17 +21,23 @@ public class Genres {
     @ManyToMany(mappedBy = "genres")
     private Set<Movie> movies = new HashSet<>();
 
-    @ManyToMany
+   /* @ManyToMany
     @JoinTable(name = "genres_actors",
             joinColumns = {@JoinColumn(name = "genre_idgenres",referencedColumnName = "idgenres")},
             inverseJoinColumns = {@JoinColumn(name = "actor_idactors",referencedColumnName = "idactors")})
-    private Set<Actor> actors = new HashSet<>();
+    private Set<Actor> actors = new HashSet<>();*/
 
-    @ManyToMany
+   @ManyToMany(mappedBy = "genres")
+   private Set<Actor> actors = new HashSet<>();
+
+   /* @ManyToMany
     @JoinTable(name = "genres_producers",
             joinColumns = {@JoinColumn(name = "genre_idgenres",referencedColumnName = "idgenres")},
             inverseJoinColumns = {@JoinColumn(name = "producer_idproducers",referencedColumnName = "idproducers")})
-    private Set<Producer> producers = new HashSet<>();
+    private Set<Producer> producers = new HashSet<>();*/
+
+   @ManyToMany(mappedBy = "genres")
+   private Set<Producer> producers = new HashSet<>();
 
     public Genres() {
     }
@@ -40,6 +46,10 @@ public class Genres {
         this.genreName = genreName;
         this.movies = movies;
         this.actors = actors;
+    }
+
+    public Genres(String genreName) {
+        this.genreName = genreName;
     }
 
     public int getId() {

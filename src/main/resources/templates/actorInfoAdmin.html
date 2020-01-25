@@ -65,8 +65,6 @@
                             <p class="wow fadeInDown">Name:</p> <li th:utext="${actor.name}"><p class="wow fadeInDown">...</p></li>
                             <p class="wow fadeInDown">Country:</p> <li th:utext="${actor.country}"><p class="wow fadeInDown">...</p></li>
                             <p class="wow fadeInDown">Date of Birthday:</p>     <li th:utext="${actor.date}"><p class="wow fadeInDown">...</p></li>
-                            <p class="wow fadeInDown">Movies:</p>     <li th:utext="${actor.movie}"><p class="wow fadeInDown">...</p></li>
-                            <p class="wow fadeInDown">Genres:</p>     <!--<li th:utext="${movie.duration}"><p class="wow fadeInDown">...</p></li>-->
                         </ul>
                     </div>
                 </div>
@@ -76,6 +74,8 @@
                     <div class="counter text-center">
                         <ul th:each = "actor:${actors}">
                             <p class="wow fadeInDown">Poster:</p>       <li>Poster</li><!--<li><a th:href="@{/addMovieImg}"><img class="img-responsive" align="photo" th:src="@{/img/}+${movie.image}"></a></li>-->
+                            <p class="wow fadeInDown">Genres:</p>
+                            <p class="wow fadeInDown">Movies:</p>        <li th:each="mov:${actor.movie}" th:utext="${(mov.getName())}"><p class="wow fadeInDown">...</p></li>
                         </ul>
                     </div>
                     <a th:href="@{/actorAdmin}" class="btn btn-default btn-home">Actor List</a>

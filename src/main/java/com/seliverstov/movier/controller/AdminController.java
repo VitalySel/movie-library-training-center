@@ -1,14 +1,8 @@
 package com.seliverstov.movier.controller;
 
 import com.seliverstov.movier.domain.*;
-import com.seliverstov.movier.repository.ActorRepository;
-import com.seliverstov.movier.repository.MovieRepository;
-import com.seliverstov.movier.repository.ProducerRepository;
-import com.seliverstov.movier.repository.UserRepository;
-import com.seliverstov.movier.service.ActorService;
-import com.seliverstov.movier.service.MovieService;
-import com.seliverstov.movier.service.ProducerService;
-import com.seliverstov.movier.service.UserService;
+import com.seliverstov.movier.repository.*;
+import com.seliverstov.movier.service.*;
 import com.sun.org.apache.regexp.internal.RE;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +27,8 @@ public class AdminController {
     private ProducerRepository producerRepository;
     @Autowired
     private ActorRepository actorRepository;
+    @Autowired
+    private GenresRepository genresRepository;
 
 
     @Autowired
@@ -43,6 +39,9 @@ public class AdminController {
     private ProducerService producerService;
     @Autowired
     private ActorService actorService;
+    @Autowired
+    private GenresService genresService;
+
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -211,6 +210,7 @@ public class AdminController {
     public String addActorAdmin() {
         return "addActorAdmin";
     }
+
     @RequestMapping(value = {"/addActor"}, method = RequestMethod.POST)
     public String addActorAdminForm(@RequestParam String name, @RequestParam String country, @RequestParam String date) {
         Actor actor = new Actor(name,country,date);
@@ -251,6 +251,30 @@ public class AdminController {
         return "redirect:" + movieId + "/movierInfoAdmin";
     }
 
+    @RequestMapping(value = "/genresAdmin",method = RequestMethod.GET)
+    public String genresAdmin(Model model){
+        model.addAttribute("genres", genresRepository.findAll());
+        return "genresAdmin";
+    }
+
+    @RequestMapping(value = "/addGenresAdmin",method = RequestMethod.GET)
+    public String addGenresAdmin(Model model){
+        return "addGenresAdmin";
+    }
+
+    @RequestMapping(value = "/addGenre",method = RequestMethod.POST)
+    public String addGenresAdminForm(@RequestParam String name, Map<String,Object> map) throws Exception {
+        Genres genreFromDb = genresService.getGenresName(name);
+
+        if (genreFromDb != null) {
+            map.put("message","Genres already exists");
+            return "addGenresAdmin";
+        }
+
+        Genres genres = new Genres(name);
+        genresService.save(genres);
+        return "redirect:/genresAdmin";
+    }
 
 
 

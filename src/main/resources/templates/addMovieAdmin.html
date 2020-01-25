@@ -63,10 +63,11 @@
                         <div><input type="text" placeholder="description" name="description" id="description"/></div>
                         <div><input type="text" placeholder="duration" name="duration" id="duration"/></div>
                         <div><input type="text" placeholder="budget" name="budget" id="budget"/></div>
-                        <div><div class="bgw"><input type="text" name="producerName" id="producerName"/></div></div>
+                        <div><div class="bgw"><input type="text" placeholder="producer" name="producerName" id="producerName"/></div></div>
                         <input type="hidden" name="_csrf" value="${_csrf.token}" />
                         <button type="submit">Add Movie</button>
                         <p class="message">Movie List?<a th:href="@{/movieAdmin}">Movies</a></p>
+                        <p class="message">Producer List?<a th:href="@{/producerAdmin}">Producers</a></p>
                         <p class="message">Admin page?<a th:href="@{/admin}">Admin</a></p>
                     </form>
                 </div>

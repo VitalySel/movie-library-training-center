@@ -33,6 +33,9 @@ public class Movie {
     @Column(name = "budget")
     private String budget;
 
+    @Column(name = "poster")
+    private String poster;
+
     @ManyToMany
     @JoinTable(name = "movie_genres",
             joinColumns = {@JoinColumn(name = "movie_idmovies",referencedColumnName = "idmovies")},
@@ -139,6 +142,14 @@ public class Movie {
 
     public void setProducers(Producer producers) {
         this.producers = producers;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
     }
 
     @Override

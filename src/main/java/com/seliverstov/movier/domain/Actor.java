@@ -26,23 +26,20 @@ public class Actor {
     @Column(name = "date_birth", length = 25)
     private String date;
 
+    @Column(name = "photo")
+    private String photo;
+
     @ManyToMany(mappedBy = "actors")
     private Set<Movie> movie = new HashSet<>();
 
-    /*public void addMovie(Movie mov) {
-        movie.add(mov);
-    }*/
+    @ManyToMany
+    @JoinTable(name = "actors_genres",
+    joinColumns = {@JoinColumn(name = "actor_idactors", referencedColumnName = "idactors")},
+    inverseJoinColumns = {@JoinColumn(name = "genre_idgenres",referencedColumnName = "idgenres")})
+    private Set<Genres> genres = new HashSet<>();
 
-    @ManyToMany(mappedBy = "actors")
-    private List<Genres> genres = new ArrayList<>();
-
-    public Actor(String name, String country, String date, Set<Movie> movie, List<Genres> genres) {
-        this.name = name;
-        this.country = country;
-        this.date = date;
-        this.movie = movie;
-        this.genres = genres;
-    }
+    /*@ManyToMany(mappedBy = "actors")
+    private List<Genres> genres = new ArrayList<>();*/
 
     public Actor(String name, String country, String date, Set<Movie> movie) {
         this.name = name;
@@ -101,11 +98,19 @@ public class Actor {
         this.date = date;
     }
 
-    public List<Genres> getGenres() {
+    public Set<Genres> getGenres() {
         return genres;
     }
 
-    public void setGenres(List<Genres> genres) {
+    public void setGenres(Set<Genres> genres) {
         this.genres = genres;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }
