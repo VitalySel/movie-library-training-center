@@ -47,7 +47,13 @@ public class AdminController {
     private String uploadPath;
 
     @RequestMapping(value = "/admin")
-    public String admin() {
+    public String admin(Map<String,Object> map)
+    {
+        map.put("userCount",userRepository.count());
+        map.put("movieCount", movieRepository.count());
+        map.put("actorCount", actorRepository.count());
+        map.put("producerCount",producerRepository.count());
+        map.put("genresCount",genresRepository.count());
         return "admin";
     }
 

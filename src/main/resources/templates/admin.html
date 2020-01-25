@@ -82,20 +82,32 @@
                         <ul id="countdown_dashboard">
                             <li>
                                 <div class="dash">
-                                    <div>0</div>
+                                    <div th:text = "${userCount}">...</div>
                                     <span class="dash_title">Users</span>
                                 </div>
                             </li>
                             <li>
                                 <div class="dash ">
-                                    <div>0</div>
-                                    <span class="dash_title">Admin</span>
+                                    <div th:text = "${movieCount}">...</div>
+                                    <span class="dash_title">Movie</span>
                                 </div>
                             </li>
                             <li>
                                 <div class="dash ">
-                                    <div>0</div>
-                                    <span class="dash_title">Movie</span>
+                                    <div th:text = "${actorCount}">...</div>
+                                    <span class="dash_title">Actors</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="dash ">
+                                    <div th:text = "${producerCount}">...</div>
+                                    <span class="dash_title">Producers</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="dash ">
+                                    <div th:text = "${genresCount}">...</div>
+                                    <span class="dash_title">Genres</span>
                                 </div>
                             </li>
                         </ul>
