@@ -36,7 +36,7 @@ public class Actor {
     @JoinTable(name = "actors_genres",
     joinColumns = {@JoinColumn(name = "actor_idactors", referencedColumnName = "idactors")},
     inverseJoinColumns = {@JoinColumn(name = "genre_idgenres",referencedColumnName = "idgenres")})
-    private Set<Genres> genres = new HashSet<>();
+    private List<Genres> genres = new ArrayList<>();
 
     /*@ManyToMany(mappedBy = "actors")
     private List<Genres> genres = new ArrayList<>();*/
@@ -98,11 +98,11 @@ public class Actor {
         this.date = date;
     }
 
-    public Set<Genres> getGenres() {
+    public List<Genres> getGenres() {
         return genres;
     }
 
-    public void setGenres(Set<Genres> genres) {
+    public void setGenres(List<Genres> genres) {
         this.genres = genres;
     }
 

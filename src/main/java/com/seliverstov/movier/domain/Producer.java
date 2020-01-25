@@ -36,7 +36,7 @@ public class Producer {
     @JoinTable(name = "producers_genres",
             joinColumns = {@JoinColumn(name = "producer_idproducers",referencedColumnName = "idproducers")},
             inverseJoinColumns = {@JoinColumn(name = "genres_idgenres",referencedColumnName = "idgenres")})
-    private Set<Genres> genres = new HashSet<>();
+    private List<Genres> genres = new ArrayList<>();
 
    /* @ManyToMany(mappedBy = "producers")
     private List<Genres> genres = new ArrayList<>();*/
@@ -90,11 +90,11 @@ public class Producer {
         this.movies = movies;
     }
 
-    public Set<Genres> getGenres() {
+    public List<Genres> getGenres() {
         return genres;
     }
 
-    public void setGenres(Set<Genres> genres) {
+    public void setGenres(List<Genres> genres) {
         this.genres = genres;
     }
 

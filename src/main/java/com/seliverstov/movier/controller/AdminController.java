@@ -322,5 +322,37 @@ public class AdminController {
         return "redirect:" + movieId + "/movierInfoAdmin";
     }
 
+    @RequestMapping(value = {"{actorid}/addActorGenres"}, method = RequestMethod.GET)
+    public String addActorGenres(@PathVariable String actorid, Model model) throws NotFoundException {
+        Actor actor = actorService.getActorId(Integer.parseInt(actorid));
+        model.addAttribute("actors",actor);
+        return "addActorGenres";
+    }
+
+    @RequestMapping(value = {"addActorGenre"}, method = RequestMethod.POST)
+    public String addActorGenreForm(@RequestParam String actorId, @RequestParam String genreName) throws NotFoundException {
+        List<String> genreNameInput = Arrays.asList(genreName.split(","));
+        Actor actor = actorService.getActorId(Integer.parseInt(actorId));
+        actor.setGenres(genresService.findGenreName(genreNameInput));
+        actorService.save(actor);
+        return "redirect:" + actorId + "/actorInfoAdmin";
+    }
+
+    @RequestMapping(value = {"{producerid}/addProducerGenres"}, method = RequestMethod.GET)
+    public String addProducerGenres(@PathVariable String producerid, Model model) throws NotFoundException {
+        Producer producer = producerService.getProducerId(Integer.parseInt(producerid));
+        model.addAttribute("producers",producer);
+        return "addProducerGenres";
+    }
+
+
+    @RequestMapping(value = {"addProducerGenre"}, method = RequestMethod.POST)
+    public String addProducerGenreForm(@RequestParam String producerId, @RequestParam String genreName) throws NotFoundException {
+        List<String> genreNameInput = Arrays.asList(genreName.split(","));
+        Producer producer = producerService.getProducerId(Integer.parseInt(producerId));
+        producer.setGenres(genresService.findGenreName(genreNameInput));
+        producerService.update(producer);
+        return "redirect:" + producerId + "/producerInfoAdmin";
+    }
 
 }
