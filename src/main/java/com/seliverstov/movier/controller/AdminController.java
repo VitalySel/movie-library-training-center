@@ -273,9 +273,54 @@ public class AdminController {
 
         Genres genres = new Genres(name);
         genresService.save(genres);
+
         return "redirect:/genresAdmin";
     }
 
+    @RequestMapping(value = {"{genreid}/genresInfoAdmin"},method = RequestMethod.GET)
+    public String genresInfoAdmin(@PathVariable String genreid, Model model) throws Exception {
+        Genres genres = genresService.getGenresId(Integer.parseInt(genreid));
+        model.addAttribute("genres", genres);
+        return "genresInfoAdmin";
+    }
+
+    @RequestMapping(value = {"{genreid}/genresEditAdmin"},method = RequestMethod.GET)
+    public String genresEditAdmin(@PathVariable String genreid, Model model) throws Exception {
+        Genres genres = genresService.getGenresId(Integer.parseInt(genreid));
+        model.addAttribute("genres", genres);
+        return "genresEditAdmin";
+    }
+
+    @RequestMapping(value = "genreEdit", method = RequestMethod.POST)
+    public String getGenresEditAdminForm(@RequestParam String name, @RequestParam String genreId, Map<String, Object> map) throws Exception {
+        Genres genresFromDb = genresService.getGenresName(name);
+        if (genresFromDb != null) {
+            map.put("message","Genres already exists");
+            return "genresEditAdmin";
+        }
+
+        Genres genres = genresService.getGenresId(Integer.parseInt(genreId));
+        genres.setGenreName(name);
+        genresService.save(genres);
+
+        return "redirect:" + genreId + "/genresInfoAdmin";
+    }
+
+    @RequestMapping(value = {"{movieid}/addMovieGenres"}, method = RequestMethod.GET)
+    public String addMovieGenres(@PathVariable String movieid, Model model) throws NotFoundException {
+        Movie movie = movieService.getMovieId(Integer.parseInt(movieid));
+        model.addAttribute("movies",movie);
+        return "addMovieGenres";
+    }
+
+    @RequestMapping(value = {"addMovieGenre"}, method = RequestMethod.POST)
+    public String addMovieGenreForm(@RequestParam String movieId, @RequestParam String genreName) throws NotFoundException {
+        List<String> genreNameInput = Arrays.asList(genreName.split(","));
+        Movie movie = movieService.getMovieId(Integer.parseInt(movieId));
+        movie.setGenres(genresService.findGenreName(genreNameInput));
+        movieService.update(movie);
+        return "redirect:" + movieId + "/movierInfoAdmin";
+    }
 
 
 }

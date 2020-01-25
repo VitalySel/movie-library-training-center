@@ -6,6 +6,8 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.*;
+
 @Service
 public class GenresService {
 
@@ -19,6 +21,28 @@ public class GenresService {
             throw new Exception("Genres already exists with name - " + name);
         }
         return null;
+    }
+
+    public Genres getGenresId(int id) throws Exception {
+
+        Optional<Genres> optionalGenres = Optional.ofNullable(genresRepository.findById(id));
+
+        if (!optionalGenres.isPresent()){
+            throw new Exception("Genres not found with id - " + id);
+        }
+        return optionalGenres.get();
+    }
+
+    public List<Genres> findGenreName(List<String> genreList) throws NotFoundException {
+        List<Genres> genres = new ArrayList<>();
+
+        for (String genreName:genreList) {
+            Genres genre = genresRepository.findBygenreName(genreName);
+            if (genre == null ) throw new NotFoundException("Genre not found with name - " + genreName);
+            else genres.add(genre);
+        }
+
+        return genres;
     }
 
     public void save(Genres genres) {
