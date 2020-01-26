@@ -42,8 +42,9 @@
             <ul class="nav navbar-nav navbar-right" id="top-nav">
                 <li><a th:href="@{/}">Home</a></li>
                 <li><a th:href="@{/movie}">Movies</a></li>
-                <li><a th:href="@{/index}">Genres</a></li>
-                <li><a th:href="@{/profile}">Profile</a></li>
+                <li><a th:href="@{/index}">Actors</a></li>
+                <li><a th:href="@{/profile}">Producers</a></li>
+                <li><a th:href="@{/profile}">Genres</a></li>
                 <li><a th:href="@{/admin}">Admin</a></li>
                 <li sec:authorize="isAuthenticated()">
                     <form th:action="@{/logout}" method="post">

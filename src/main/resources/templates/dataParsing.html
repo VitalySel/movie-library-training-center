@@ -14,7 +14,6 @@
     <link href='http://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
-
     <!-- CSS -->
 
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
@@ -22,6 +21,10 @@
     <link rel="stylesheet" th:href="@{/css/owl.carousel.css}">
     <link rel="stylesheet" th:href="@{/css/animate.css}">
     <link rel="stylesheet" th:href="@{/css/main.css}">
+
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+
+
     <!-- Responsive Stylesheet -->
     <link rel="stylesheet" th:href="@{/css/responsive.css}">
 </head>
@@ -49,26 +52,24 @@
     </div><!-- /.container-fluid -->
 </div>
 
-<section id="hero-area" class="section">
-    <div class="container">
+<section id="hero-area">
+    <div class="container_login">
         <div class="row">
-            <div th:each="movie:${movies}">
-            <div class="col-md-7 col-sm-12 wow fadeInLeft">
-                <div class="sub-heading">
-                    <h3 th:text="${movie.name}"></h3>
-                    <p th:utext="${movie.producers.getName()}"></p>
-                    <p th:each="genre:${movie.genres}" th:utext="${(genre.getGenreName())}"></p>
+            <div class="login-page">
+                <div class="form">
+                    <form class="login-form" th:action="@{/parsing}" method="post">
+                        <div><input type="number" placeholder="id start" name="username" id="username"/></div>
+                        <div><input type="number" placeholder="id end" name="mail" id="mail"/></div>
+                        <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                        <button type="submit">Parsing</button>
+                        <p class="message">Admin page?<a th:href="@{/admin}">Admin</a></p>
+                    </form>
                 </div>
             </div>
-            <div class="col-md-5 col-sm-12 wow fadeInLeft" data-wow-delay="0.3s">
-                <img th:src="${movie.poster}" alt="poster" class="img-responsive">
-            </div>
-            </div>
-        </div>
-    </div>
-    </div>
-    </div>
-</section><!-- #about close -->
+
+        </div><!-- .row close -->
+    </div><!-- .container close -->
+</section><!-- header close -->
 
 <footer>
     <div class="container">

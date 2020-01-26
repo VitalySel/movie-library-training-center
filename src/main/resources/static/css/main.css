@@ -122,6 +122,8 @@ a:active {
 .sub-heading h3 {
     font-size: 30px;
     line-height: 40px;
+     color: #fff;
+
 }
 
 .sub-heading h3 small {
@@ -135,7 +137,7 @@ a:active {
 
 .sub-heading > p {
     font-size: 14px;
-    color: #777;
+     color: #fff;
 }
 
 .btn {    

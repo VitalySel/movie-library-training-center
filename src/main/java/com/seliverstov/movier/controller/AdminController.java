@@ -361,4 +361,9 @@ public class AdminController {
         return "redirect:" + producerId + "/producerInfoAdmin";
     }
 
+    @RequestMapping(value = "/dataParsing",method = RequestMethod.GET)
+    public String parsing(Model model){
+        return "dataparsing";
+    }
+
 }
