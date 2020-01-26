@@ -52,12 +52,15 @@
 <section id="hero-area" class="section">
     <div class="container">
         <div class="row">
+            <div class="block">
+                <h1 class="wow fadeInDown">Movies</h1>
+            </div>
             <div th:each="movie:${movies}">
             <div class="col-md-7 col-sm-12 wow fadeInLeft">
                 <div class="sub-heading">
-                    <h3 th:text="${movie.name}"></h3>
-                    <p th:utext="${movie.producers.getName()}"></p>
-                    <p th:each="genre:${movie.genres}" th:utext="${(genre.getGenreName())}"></p>
+                    <a href="#" th:href="@{${movie.id} + '/movierInfoAdmin'}"><h3 th:text="${movie.name}"></h3></a>
+                    <a href="#" th:href="@{${movie.producers.getId()} + '/producerInfoAdmin'}"><p th:utext="${movie.producers.getName()}"></p></a>
+                    <a href="#" th:each= "genre:${movie.genres}" th:href="@{${genre.getId()} + '/genresInfoAdmin'}"><p th:each="genre:${movie.genres}" th:utext="${(genre.getGenreName())}"></p></a>
                 </div>
             </div>
             <div class="col-md-5 col-sm-12 wow fadeInLeft" data-wow-delay="0.3s">

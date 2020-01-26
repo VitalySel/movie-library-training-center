@@ -60,14 +60,18 @@
             <div class="col-md-6">
                 <div class="block">
                     <div class="caption">
-                        <h1 class="wow fadeInDown">Information Movie</h1>
                         <ul th:each = "movie:${movies}">
-                            <p class="wow fadeInDown">Name:</p> <li th:utext="${movie.name}"><p class="wow fadeInDown">...</p></li>
-                            <p class="wow fadeInDown">Release:</p> <li th:utext="${movie.releaseDate}"><p class="wow fadeInDown">...</p></li>
-                            <p class="wow fadeInDown">Description:</p>     <li th:utext="${movie.description}"><p class="wow fadeInDown">...</p></li>
-                            <p class="wow fadeInDown">Duration:</p>     <li th:utext="${movie.duration}"><p class="wow fadeInDown">...</p></li>
-                            <p class="wow fadeInDown">Box Office:</p>     <li th:utext="${movie.budget + '$'}"><p class="wow fadeInDown">...</p></li>
-                            <p class="wow fadeInDown">Genres:</p>     <li th:each="genre:${movie.genres}" th:utext="${(genre.getGenreName())}"><p class="wow fadeInDown">...</p></li>
+                        <h1 class="wow fadeInDown"><li th:utext="${movie.name}">...</li></h1>
+                            <p class="wow fadeInDown">Release:</p>
+                            <h3><li th:utext="${movie.releaseDate}">...</li></h3>
+                            <p class="wow fadeInDown">Duration:</p>
+                            <h3><li th:utext="${movie.duration}">...</li></h3>
+                            <p class="wow fadeInDown">Box Office:</p>
+                            <h3><li th:utext="${movie.budget + '$'}">...</li></h3>
+                            <p class="wow fadeInDown">Genres:</p>
+                            <h3><li th:each="genre:${movie.genres}" th:utext="${(genre.getGenreName())}">...</li></h3>
+                            <p class="wow fadeInDown">Description:</p>
+                            <h3><li th:utext="${movie.description}">...</li></h3>
                         </ul>
                     </div>
                 </div>
@@ -76,9 +80,9 @@
                 <div class="block">
                     <div class="counter text-center">
                         <ul th:each = "movie:${movies}">
-                            <p class="wow fadeInDown">Poster:</p>       <li>Poster</li><!--<li><a th:href="@{/addMovieImg}"><img class="img-responsive" align="photo" th:src="@{/img/}+${movie.image}"></a></li>-->
-                            <p class="wow fadeInDown">Producer:</p>     <li th:utext="${movie.producers.getName()}"><p class="wow fadeInDown">...</p></li>
-                            <p class="wow fadeInDown">Actors:</p>        <li th:each="actor:${movie.actors}" th:utext="${(actor.getName())}"><p class="wow fadeInDown">...</p></li>
+                            <p class="wow fadeInDown">Poster:</p>     <li>Poster</li><!--<li><a th:href="@{/addMovieImg}"><img class="img-responsive" align="photo" th:src="@{/img/}+${movie.image}"></a></li>-->
+                            <p class="wow fadeInDown">Producer:</p>  <a href="#" th:href="@{${movie.producers.getId()} + '/producerInfoAdmin'}"><li th:utext="${movie.producers.getName()}"><p class="wow fadeInDown">...</p></li></a>
+                            <p class="wow fadeInDown">Actors:</p>    <li th:each="actor:${movie.actors}" th:utext="${(actor.getName())}"><p class="wow fadeInDown">...</p></li>
                         </ul>
                     </div>
                     <a th:href="@{/movieAdmin}" class="btn btn-default btn-home">Movie List</a>
