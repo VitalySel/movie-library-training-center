@@ -15,11 +15,11 @@ public class HibernateConfig {
 
         @Bean
         public DataSource dataSource() throws URISyntaxException {
-            URI dbUri = new URI(System.getenv("DATABASE_URL"));
+            URI dbUri = new URI(System.getenv("CLEARDB DATABASE_URL"));
 
             String username = dbUri.getUserInfo().split(":")[0];
             String password = dbUri.getUserInfo().split(":")[1];
-            String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+            String dbUrl = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath();
 
             DriverManagerDataSource basicDataSource = new DriverManagerDataSource();
             basicDataSource.setUrl(dbUrl);

@@ -11,5 +11,11 @@
         <property name="sslmode" value="require" />
       </driver-properties>
     </data-source>
+    <data-source source="LOCAL" name="MySQL - heroku_6990d4014b9e0d7@eu-cdbr-west-02.cleardb.net" uuid="2e7adbc1-866b-4437-bd9a-807fe725f8c4">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://eu-cdbr-west-02.cleardb.net:3306/heroku_6990d4014b9e0d7?reconnect=true</jdbc-url>
+    </data-source>
   </component>
 </project>
