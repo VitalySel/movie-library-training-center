@@ -41,9 +41,10 @@
         <nav class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav navbar-right" id="top-nav">
                 <li><a th:href="@{/}">Home</a></li>
-                <li><a th:href="@{/movie}" class="nav-link">Movies</a></li>
-                <li><a th:href="@{/index}">Genres</a></li>
-                <li><a th:href="@{/profile}">Profile</a></li>
+                <li><a th:href="@{/movie}">Movies</a></li>
+                <li><a th:href="@{/actors}">Actors</a></li>
+                <li><a th:href="@{/producers}">Producers</a></li>
+                <li><a th:href="@{/admin}">Admin</a></li>
                 <li sec:authorize="isAuthenticated()">
                     <form th:action="@{/logout}" method="post">
                         <input type="submit" class="btn btn-default navbar-btn" value="Sign Out" />
@@ -60,7 +61,7 @@
             <div class="col-md-6">
                 <div class="block">
                     <div class="caption">
-                        <h1 class="wow fadeInDown">Information Producer</h1>
+                        <h1 class="wow fadeInDown">Producer</h1>
                         <ul th:each = "producer:${producers}">
                             <p class="wow fadeInDown">Name:</p> <li th:utext="${producer.name}"><p class="wow fadeInDown">...</p></li>
                             <p class="wow fadeInDown">Country:</p> <li th:utext="${producer.country}"><p class="wow fadeInDown">...</p></li>
@@ -73,7 +74,7 @@
                 <div class="block">
                     <div class="counter text-center">
                         <ul th:each = "producer:${producers}">
-                            <p class="wow fadeInDown">Poster:</p>       <li>Poster</li><!--<li><a th:href="@{/addMovieImg}"><img class="img-responsive" align="photo" th:src="@{/img/}+${movie.image}"></a></li>-->
+                            <p class="wow fadeInDown">Poster:</p>        <li><img th:src="${producer.photo}" alt="poster" class="img-responsive"></li>
                             <p class="wow fadeInDown">Genres:</p>        <li th:each="genre:${producer.genres}" th:utext="${(genre.getGenreName())}"><p class="wow fadeInDown">...</p></li>
                             <p class="wow fadeInDown">Movies:</p>        <li th:each="movie:${producer.movies}" th:utext="${(movie.getName())}"><p class="wow fadeInDown">...</p></li>
                         </ul>

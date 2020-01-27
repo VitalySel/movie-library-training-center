@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -94,7 +95,7 @@ public class AdminController {
         for (User user: users) {
             Set userRoles = user.getRoles();
             if (!userRoles.contains(Role.ADMIN)){
-                 userNotAdmin.add(user);
+                userNotAdmin.add(user);
             }
         }
         model.addAttribute("users", userNotAdmin);
@@ -117,14 +118,14 @@ public class AdminController {
     }
 
     @RequestMapping(value = {"/addMovieAdmin"},method = RequestMethod.GET)
-        public String addMovieAdmin(Model model) {
+    public String addMovieAdmin(Model model) {
         return "addMovieAdmin";
     }
 
     @RequestMapping(value = {"/addMovie"},method = RequestMethod.POST)
     public String addMovieAdminForm(@RequestParam String name, @RequestParam String releaseDate,
                                     @RequestParam String description, @RequestParam String duration, @RequestParam String budget,@RequestParam String producerName) {
-        Movie movie = new Movie(name,releaseDate,description,duration,budget,producerRepository.findByName(producerName));
+        Movie movie = new Movie(name,releaseDate,description,duration,budget,producerRepository.findByName(producerName), "null");
         movieRepository.save(movie);
         return "redirect:/movieAdmin";
     }
@@ -363,7 +364,86 @@ public class AdminController {
 
     @RequestMapping(value = "/dataParsing",method = RequestMethod.GET)
     public String parsing(Model model){
-        return "dataparsing";
+        return "dataParsing";
+    }
+
+    @RequestMapping(value = {"/dataParsing"}, method = RequestMethod.POST)
+    public String parsing(@RequestParam String start, @RequestParam String end, Map<String, Object> model) {
+        ParserService parserService = new ParserService();
+        for (int i = Integer.parseInt(start); i < Integer.parseInt(end); i++) {
+            try {
+                String[] res = parserService.parsePage(i).split("\\|");
+                if(!res[0].equals("null") && movieRepository.findByName(res[0]) == null) {
+                    if (producerRepository.findByName(res[9]) == null) {
+                        String[] prod = parserService.parsDirector(res[10]).split("\\|");
+                        Producer producer;
+
+                        if (prod.length > 3) {
+                            producer = new Producer(prod[0], prod[2], prod[1], prod[3]);
+                            producerRepository.save(producer);
+                        }
+                        else {
+                            producer = new Producer(prod[0], prod[2], prod[1]);
+                            producerRepository.save(producer);
+                        }
+                    }
+
+                    Movie movie = new Movie(res[0], res[4], res[7], res[2], res[3], producerRepository.findByName(res[9]), res[5]);
+
+                    String[] actors = res[8].split(",");
+                    for (int j = 0; j < (actors.length > 3 ? 3 : actors.length); j++) {
+                        Actor actor;
+                        String[] act = parserService.parsDirector(actors[j]).split("\\|");
+
+                        if(actorRepository.findByName(act[0]) != null){
+                            actor = actorRepository.findByName(act[0]);
+                        }
+                        else{
+
+                            if (act.length > 3) {
+                                actor = new Actor(act[0], act[2], act[1], act[3]);
+                            }
+                            else actor = new Actor(act[0], act[2], act[1]);
+                        }
+
+                        String[] genres = res[6].split(",");
+                        for (int k = 0; k < (genres.length > 1 ? 1 : genres.length); k++) {
+                            Genres genres1;
+                            if(genresRepository.findBygenreName(genres[k]) != null) {
+                                genres1 = genresRepository.findBygenreName(genres[k]);
+                            }
+                            else{
+                                genres1 = new Genres(genres[k]);
+                                genresRepository.save(genres1);
+                            }
+                            if(!actor.getGenres().contains(genres1)) {
+                                actor.addGenres(genres1);
+                            }
+                            if(!movie.getGenres().contains(genres1)){
+                                movie.addGenres(genres1);
+                            }
+                            if(!producerRepository.findByName(res[9]).getGenres().contains(genres1)){
+                                Producer producer = producerRepository.findByName(res[9]);
+                                producer.addGenres(genres1);
+                                producer.addMovies(movie);
+                                producerRepository.save(producer);
+                            }
+                        }
+                        actor.addMovie(movie);
+                        actorRepository.save(actor);
+                        movie.addActor(actor);
+                    }
+                    movieRepository.save(movie);
+                }
+                else {
+                    model.put("message","Incorrect movie or movie exists. Try another one");
+                    return "dataParsing";
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return "redirect:/movieAdmin";
     }
 
 }

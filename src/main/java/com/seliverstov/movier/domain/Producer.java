@@ -38,9 +38,6 @@ public class Producer {
             inverseJoinColumns = {@JoinColumn(name = "genres_idgenres",referencedColumnName = "idgenres")})
     private List<Genres> genres = new ArrayList<>();
 
-   /* @ManyToMany(mappedBy = "producers")
-    private List<Genres> genres = new ArrayList<>();*/
-
     public Producer(){
     }
 
@@ -48,6 +45,13 @@ public class Producer {
         this.name = name;
         this.country = country;
         this.date = date;
+    }
+
+    public Producer(String name, String country, String date, String photo) {
+        this.name = name;
+        this.country = country;
+        this.date = date;
+        this.photo = photo;
     }
 
     public int getId() {
@@ -90,12 +94,20 @@ public class Producer {
         this.movies = movies;
     }
 
+    public void addMovies(Movie movies) {
+        this.movies.add(movies);
+    }
+
     public List<Genres> getGenres() {
         return genres;
     }
 
     public void setGenres(List<Genres> genres) {
         this.genres = genres;
+    }
+
+    public void addGenres(Genres genres) {
+        this.genres.add(genres);
     }
 
     public String getPhoto() {

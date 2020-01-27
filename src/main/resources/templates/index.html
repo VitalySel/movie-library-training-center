@@ -43,7 +43,7 @@
                 <li><a th:href="@{/}">Home</a></li>
                 <li><a th:href="@{/movie}">Movies</a></li>
                 <li><a th:href="@{/actors}">Actors</a></li>
-                <li><a th:href="@{/profile}">Producers</a></li>
+                <li><a th:href="@{/producers}">Producers</a></li>
                 <li><a th:href="@{/admin}">Admin</a></li>
                 <li sec:authorize="isAuthenticated()">
                     <form th:action="@{/logout}" method="post">

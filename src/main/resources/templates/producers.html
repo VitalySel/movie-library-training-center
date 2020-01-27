@@ -14,6 +14,7 @@
     <link href='http://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
+
     <!-- CSS -->
 
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
@@ -21,7 +22,6 @@
     <link rel="stylesheet" th:href="@{/css/owl.carousel.css}">
     <link rel="stylesheet" th:href="@{/css/animate.css}">
     <link rel="stylesheet" th:href="@{/css/main.css}">
-    <link rel="stylesheet" th:href="@{/css/login.css}">
     <!-- Responsive Stylesheet -->
     <link rel="stylesheet" th:href="@{/css/responsive.css}">
 </head>
@@ -55,41 +55,25 @@
     </div><!-- /.container-fluid -->
 </div>
 
-<section id="hero-area">
+<section id="hero-area" class="section">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
-                <div class="block">
-
-                    <div class="form">
-                        <form class="login-form" th:action="@{/movieEdit}" method="post">
-                            <ul th:each = "movie:${movies}">
-                                <li><div><input type="text" th:placeholder="${movie.name}" name="name" id="name"/></div></li>
-                                <li><div><input type="text" th:placeholder="${movie.releaseDate}" name="releaseDate" id="releaseDate"/></div></li>
-                                <li><div><input type="text" th:placeholder="${movie.description}" name="description" id="description"/></div></li>
-                                <li><div><input type="text" th:placeholder="${movie.duration}" name="duration" id="duration"/></div></li>
-                                <li><div><input type="text" th:placeholder="${movie.budget}" name="budget" id="budget"/></div></li>
-                                <input type="hidden" th:value="@{${movie.id}}" name="movieId">
-                                <input type="hidden" name="_csrf" value="${_csrf.token}" />
-                                <button type="submit">Edit Save</button>
-                            </ul>
-                        </form>
+            <h1 class="wow fadeInDown">Producers</h1>
+            <div th:each="producer:${producers}">
+                <div class="col-md-7 col-sm-12 wow fadeInLeft">
+                    <div class="sub-heading">
+                        <a href="#" th:href="@{${producer.id} + '/producerInfoAdmin'}"><h3 th:text="${producer.name}"></h3></a>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6 wow zoomIn">
-                <div class="block">
-                    <div class="counter text-center">
-                        <ul id="countdown_dashboard" th:each = "movie:${movies}">
-                           <!-- <li><a th:href="@{/addAvatar}"><img class="img-responsive" align="photo" th:src="@{/img/}+${user.avatar}"></a></li>-->
-                        </ul>
-                    </div>
-                    <a th:href="@{/movieAdmin}" class="btn btn-default btn-home">Movie List</a>
+                <div class="col-md-5 col-sm-12 wow fadeInLeft" data-wow-delay="0.3s">
+                    <img th:src="${producer.photo}" width="100" height="141" class="img-responsive">
                 </div>
             </div>
-        </div><!-- .row close -->
-    </div><!-- .container close -->
-</section>
+        </div>
+    </div>
+    </div>
+    </div>
+</section><!-- #about close -->
 
 <footer>
     <div class="container">
@@ -117,5 +101,4 @@
 <script th:src="@{/js/main.js}"></script>
 
 </body>
-</html>
 </html>

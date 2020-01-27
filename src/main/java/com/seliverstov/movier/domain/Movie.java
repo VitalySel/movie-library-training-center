@@ -24,7 +24,8 @@ public class Movie {
     @Column(name = "release_date")
     private String releaseDate;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 100000)
+
     private String description;
 
     @Column(name = "duration")
@@ -38,30 +39,31 @@ public class Movie {
 
     @ManyToMany
     @JoinTable(name = "movie_genres",
-            joinColumns = {@JoinColumn(name = "movie_idmovies",referencedColumnName = "idmovies")},
-            inverseJoinColumns = {@JoinColumn(name = "genres_idgenres",referencedColumnName = "idgenres")})
+            joinColumns = {@JoinColumn(name = "movie_idmovies", referencedColumnName = "idmovies")},
+            inverseJoinColumns = {@JoinColumn(name = "genres_idgenres", referencedColumnName = "idgenres")})
     private List<Genres> genres = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "movie_actors",
-            joinColumns = {@JoinColumn(name = "movie_idmovies",referencedColumnName = "idmovies")},
-            inverseJoinColumns = {@JoinColumn(name = "actor_idactors",referencedColumnName = "idactors")})
+            joinColumns = {@JoinColumn(name = "movie_idmovies", referencedColumnName = "idmovies")},
+            inverseJoinColumns = {@JoinColumn(name = "actor_idactors", referencedColumnName = "idactors")})
     private Set<Actor> actors = new HashSet<>();
 
-    @ManyToOne(optional = false,cascade = CascadeType.ALL)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "movies")
     private Producer producers;
 
     public Movie() {
     }
 
-    public Movie(String name, String releaseDate, String description, String duration, String budget, Producer producers) {
+    public Movie(String name, String releaseDate, String description, String duration, String budget, Producer producers, String poster) {
         this.name = name;
         this.releaseDate = releaseDate;
         this.description = description;
         this.duration = duration;
         this.budget = budget;
         this.producers = producers;
+        this.poster = poster;
     }
 
     public Movie(String name, String releaseDate, String description, String duration, String budget) {
@@ -128,6 +130,10 @@ public class Movie {
         this.genres = genres;
     }
 
+    public void addGenres(Genres genres) {
+        this.genres.add(genres);
+    }
+
     public Set<Actor> getActors() {
         return actors;
     }
@@ -135,6 +141,11 @@ public class Movie {
     public void setActors(Set<Actor> actors) {
         this.actors = actors;
     }
+
+    public void addActor(Actor actors) {
+        this.actors.add(actors);
+    }
+
 
     public Producer getProducers() {
         return producers;

@@ -20,7 +20,7 @@ public class Actor {
     @NotNull
     private String name;
 
-    @Column(name = "country", length = 25)
+    @Column(name = "country", length = 100000)
     private String country;
 
     @Column(name = "date_birth", length = 25)
@@ -34,8 +34,8 @@ public class Actor {
 
     @ManyToMany
     @JoinTable(name = "actors_genres",
-    joinColumns = {@JoinColumn(name = "actor_idactors", referencedColumnName = "idactors")},
-    inverseJoinColumns = {@JoinColumn(name = "genre_idgenres",referencedColumnName = "idgenres")})
+            joinColumns = {@JoinColumn(name = "actor_idactors", referencedColumnName = "idactors")},
+            inverseJoinColumns = {@JoinColumn(name = "genre_idgenres",referencedColumnName = "idgenres")})
     private List<Genres> genres = new ArrayList<>();
 
     /*@ManyToMany(mappedBy = "actors")
@@ -56,6 +56,13 @@ public class Actor {
         this.name = name;
         this.country = country;
         this.date = date;
+    }
+
+    public Actor(String name, String country, String date,String photo) {
+        this.name = name;
+        this.country = country;
+        this.date = date;
+        this.photo = photo;
     }
 
     public int getId() {
@@ -90,6 +97,10 @@ public class Actor {
         this.movie = movie;
     }
 
+    public void addMovie(Movie movie) {
+        this.movie.add(movie);
+    }
+
     public String getDate() {
         return date;
     }
@@ -104,6 +115,10 @@ public class Actor {
 
     public void setGenres(List<Genres> genres) {
         this.genres = genres;
+    }
+
+    public void addGenres(Genres genres) {
+        this.genres.add(genres);
     }
 
     public String getPhoto() {
