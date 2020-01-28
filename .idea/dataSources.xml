@@ -17,5 +17,11 @@
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://eu-cdbr-west-02.cleardb.net:3306/heroku_6990d4014b9e0d7?reconnect=true</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="d9us2dnq7co2t@ec2-54-195-252-243.eu-west-1.compute.amazonaws.com" uuid="22c8b902-955c-4ba5-beb9-afec4168a3c4">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ec2-54-195-252-243.eu-west-1.compute.amazonaws.com:5432/d9us2dnq7co2t</jdbc-url>
+    </data-source>
   </component>
 </project>
