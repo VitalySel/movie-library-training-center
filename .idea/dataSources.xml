@@ -1,27 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="heroku" uuid="1b4f224a-03d4-46c6-abce-d390ff9e5f11">
+    <data-source source="LOCAL" name="d6sd6jnsaej5i3@ec2-54-228-237-40.eu-west-1.compute.amazonaws.com" uuid="2af3d8d2-1a22-44d0-a119-3db2bd49663c">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://ec2-54-195-252-243.eu-west-1.compute.amazonaws.com:5432/d85vj5ajbb3jld</jdbc-url>
+      <jdbc-url>jdbc:postgresql://ec2-54-228-237-40.eu-west-1.compute.amazonaws.com:5432/d6sd6jnsaej5i3</jdbc-url>
       <driver-properties>
         <property name="ssl" value="true" />
         <property name="sslmode" value="require" />
+        <property name="sslfactory" value="org.postgresql.ssl.NonValidatingFactory" />
       </driver-properties>
-    </data-source>
-    <data-source source="LOCAL" name="MySQL - heroku_6990d4014b9e0d7@eu-cdbr-west-02.cleardb.net" uuid="2e7adbc1-866b-4437-bd9a-807fe725f8c4">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://eu-cdbr-west-02.cleardb.net:3306/heroku_6990d4014b9e0d7?reconnect=true</jdbc-url>
-    </data-source>
-    <data-source source="LOCAL" name="d9us2dnq7co2t@ec2-54-195-252-243.eu-west-1.compute.amazonaws.com" uuid="22c8b902-955c-4ba5-beb9-afec4168a3c4">
-      <driver-ref>postgresql</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://ec2-54-195-252-243.eu-west-1.compute.amazonaws.com:5432/d9us2dnq7co2t</jdbc-url>
     </data-source>
   </component>
 </project>

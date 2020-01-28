@@ -3,10 +3,10 @@ create sequence hibernate_sequence start 1 increment 1
 CREATE TABLE actor
 (
     idactors integer NOT NULL,
-    country character varying(100000) COLLATE pg_catalog."default",
-    date_birth character varying(25) COLLATE pg_catalog."default",
-    name character varying(25) COLLATE pg_catalog."default" NOT NULL,
-    photo character varying(255) COLLATE pg_catalog."default",
+    country character varying(100000),
+    date_birth character varying(25),
+    name character varying(25) NOT NULL,
+    photo character varying(255),
     CONSTRAINT actor_pkey PRIMARY KEY (idactors)
 )
 
@@ -27,7 +27,7 @@ CREATE TABLE actors_genres
 CREATE TABLE genres
 (
     idgenres integer NOT NULL,
-    genre_name character varying(25) COLLATE pg_catalog."default" NOT NULL,
+    genre_name character varying(25) NOT NULL,
     CONSTRAINT genres_pkey PRIMARY KEY (idgenres),
     CONSTRAINT uk_11hq5auj6f9viwt8hr86j714d UNIQUE (genre_name)
 
@@ -36,12 +36,12 @@ CREATE TABLE genres
 CREATE TABLE movie
 (
     idmovies integer NOT NULL,
-    budget character varying(255) COLLATE pg_catalog."default",
-    description character varying(100000) COLLATE pg_catalog."default",
-    duration character varying(255) COLLATE pg_catalog."default",
-    movie_name character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    poster character varying(255) COLLATE pg_catalog."default",
-    release_date character varying(255) COLLATE pg_catalog."default",
+    budget character varying(255),
+    description character varying(100000),
+    duration character varying(255),
+    movie_name character varying(255) NOT NULL,
+    poster character varying(255) ,
+    release_date character varying(255),
     movies integer NOT NULL,
     CONSTRAINT movie_pkey PRIMARY KEY (idmovies),
     CONSTRAINT fkjgh4bv2cqrvy41c7okinjhkwb FOREIGN KEY (movies)
@@ -82,10 +82,10 @@ CREATE TABLE movie_genres
 CREATE TABLE producer
 (
     idproducers integer NOT NULL,
-    producer_country character varying(255) COLLATE pg_catalog."default",
-    producer_date character varying(255) COLLATE pg_catalog."default",
-    producer_name character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    producer_photo character varying(255) COLLATE pg_catalog."default",
+    producer_country character varying(255),
+    producer_date character varying(255),
+    producer_name character varying(255) NOT NULL,
+    producer_photo character varying(255),
     CONSTRAINT producer_pkey PRIMARY KEY (idproducers)
 )
 
@@ -106,20 +106,20 @@ CREATE TABLE producers_genres
 CREATE TABLE usr
 (
     id bigint NOT NULL,
-    activationcode character varying(255) COLLATE pg_catalog."default",
+    activationcode character varying(255) ,
     active boolean NOT NULL,
-    avatar character varying(255) COLLATE pg_catalog."default",
-    mail character varying(255) COLLATE pg_catalog."default",
-    password character varying(255) COLLATE pg_catalog."default",
-    realname character varying(255) COLLATE pg_catalog."default",
-    username character varying(255) COLLATE pg_catalog."default",
+    avatar character varying(255),
+    mail character varying(255),
+    password character varying(255),
+    realname character varying(255),
+    username character varying(255),
     CONSTRAINT usr_pkey PRIMARY KEY (id)
 )
 
 CREATE TABLE usr_role
 (
     usr_id bigint NOT NULL,
-    roles character varying(255) COLLATE pg_catalog."default",
+    roles character varying(255),
     CONSTRAINT fk9ffk6ts9njcytrt8ft17fvr3p FOREIGN KEY (usr_id)
         REFERENCES usr (id) MATCH SIMPLE
         ON UPDATE NO ACTION
