@@ -54,10 +54,10 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-       <!-- <dependency>
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-        </dependency>-->
+        </dependency>
 
         <dependency>
             <groupId>com.heroku.sdk</groupId>
@@ -70,6 +70,7 @@
             <artifactId>spark-core</artifactId>
             <version>2.9.1</version>
         </dependency>
+<!--
 
         <dependency>
 
@@ -79,6 +80,7 @@
 
             <version>${postgresql.version}</version>
         </dependency>
+-->
 
         <!-- security -->
         <dependency>

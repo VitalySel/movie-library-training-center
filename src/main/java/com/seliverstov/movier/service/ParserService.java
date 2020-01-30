@@ -37,6 +37,7 @@ public class ParserService {
             return "null";
         }
         res += document.getElementsByClass("movie_poster__wrapper ").select("img").attr("src") + "|";
+
         Elements elements = document.getElementsByAttributeValueContaining("href","/R2D2/?genres");
         for (int i = 0; i < elements.size(); i++) {
             res += (elements.get(i).text()+",");

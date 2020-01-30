@@ -84,6 +84,14 @@ public class Genres {
         this.actors = actors;
     }
 
+    public Set<Producer> getProducers() {
+        return producers;
+    }
+
+    public void setProducers(Set<Producer> producers) {
+        this.producers = producers;
+    }
+
     @Override
     public String toString() {
         return genreName;
