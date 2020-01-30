@@ -37,6 +37,9 @@ public class Movie {
     @Column(name = "poster")
     private String poster;
 
+    @Column(name = "active")
+    private boolean active;
+
     @ManyToMany
     @JoinTable(name = "movie_genres",
             joinColumns = {@JoinColumn(name = "movie_idmovies", referencedColumnName = "idmovies")},
@@ -161,6 +164,14 @@ public class Movie {
 
     public void setPoster(String poster) {
         this.poster = poster;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     @Override

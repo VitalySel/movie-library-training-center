@@ -79,7 +79,7 @@
                                 <td th:text="${movie.releaseDate}">...</td>
                                 <td th:text="${movie.genres}">...</td>
 
-                                <td><a href="#" th:href="@{${movie.id} + '/movierInfoAdmin'}">Info</a></td>
+                                <td><a href="#" th:href="@{'/movierInfoAdmin/'+ ${movie.id}}">Info</a></td>
                                 <td><a href="#" th:href="@{${movie.id} + '/movierEditAdmin'}">Edit</a></td>
                                 <td><a href="#" th:href="@{${movie.id} + '/addMovieActor'}">Add Actor</a></td>
                                 <td><a href="#" th:href="@{${movie.id} + '/addMovieGenres'}">Add Genres</a></td>

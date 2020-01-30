@@ -29,6 +29,9 @@ public class Actor {
     @Column(name = "photo")
     private String photo;
 
+    @Column(name = "active")
+    private boolean active;
+
     @ManyToMany(mappedBy = "actors")
     private Set<Movie> movie = new HashSet<>();
 
@@ -38,8 +41,6 @@ public class Actor {
             inverseJoinColumns = {@JoinColumn(name = "genre_idgenres",referencedColumnName = "idgenres")})
     private List<Genres> genres = new ArrayList<>();
 
-    /*@ManyToMany(mappedBy = "actors")
-    private List<Genres> genres = new ArrayList<>();*/
 
     public Actor(String name, String country, String date, Set<Movie> movie) {
         this.name = name;
@@ -127,5 +128,13 @@ public class Actor {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

@@ -75,7 +75,7 @@
                                 <td th:text="${producer.id}">...</td>
                                 <td th:text="${producer.name}">...</td>
 
-                                <td><a href="#" th:href="@{${producer.id} + '/producerInfoAdmin'}">Info</a></td>
+                                <td><a href="#" th:href="@{'/producerInfoAdmin/'+ ${producer.id}}">Info</a></td>
                                 <td><a href="#" th:href="@{${producer.id} + '/producerEditAdmin'}">Edit</a></td>
                                 <td><a href="#" th:href="@{${producer.id} + '/addProducerGenres'}">Add genres</a></td>
                             </tr>

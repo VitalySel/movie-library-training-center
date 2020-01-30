@@ -29,6 +29,9 @@ public class Producer {
     @Column(name = "producer_photo")
     private String photo;
 
+    @Column(name = "active")
+    private boolean active;
+
     @OneToMany(mappedBy = "producers")
     private Set<Movie> movies = new HashSet<>();
 
@@ -116,5 +119,13 @@ public class Producer {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

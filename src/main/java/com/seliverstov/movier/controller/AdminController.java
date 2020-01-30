@@ -150,7 +150,7 @@ public class AdminController {
     }
 
 
-    @RequestMapping(value = {"{movieid}/movierInfoAdmin"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/movierInfoAdmin/{movieid}"}, method = RequestMethod.GET)
     public String getMovieInfoAdmin(@PathVariable String movieid, Model model) throws NotFoundException {
         Movie movie = movieService.getMovieId(Integer.parseInt(movieid));
         model.addAttribute("movies",movie);
@@ -176,7 +176,7 @@ public class AdminController {
         return  "redirect:"+movieId+"/movierInfoAdmin";
     }
 
-    @RequestMapping(value = {"{producerid}/producerInfoAdmin"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/producerInfoAdmin/{producerid}"}, method = RequestMethod.GET)
     public String getProducerInfoAdmin(@PathVariable String producerid, Model model) throws NotFoundException {
         Producer producer = producerService.getProducerId(Integer.parseInt(producerid));
         model.addAttribute("producers", producer);
@@ -206,7 +206,7 @@ public class AdminController {
         return "actorAdmin";
     }
 
-    @RequestMapping(value = "{actorid}/actorInfoAdmin",method = RequestMethod.GET)
+    @RequestMapping(value = "/actorInfoAdmin/{actorid}",method = RequestMethod.GET)
     public String getActorInfoAdmin(@PathVariable String actorid, Model model) throws NotFoundException {
         Actor actor = actorService.getActorId(Integer.parseInt(actorid));
         model.addAttribute("actors", actor);
@@ -284,7 +284,7 @@ public class AdminController {
         return "redirect:/genresAdmin";
     }
 
-    @RequestMapping(value = {"{genreid}/genresInfoAdmin"},method = RequestMethod.GET)
+    @RequestMapping(value = {"/genresInfoAdmin/{genreid}"},method = RequestMethod.GET)
     public String genresInfoAdmin(@PathVariable String genreid, Model model) throws Exception {
         Genres genres = genresService.getGenresId(Integer.parseInt(genreid));
         model.addAttribute("genres", genres);
@@ -368,9 +368,9 @@ public class AdminController {
     }
 
     @RequestMapping(value = {"/dataParsing"}, method = RequestMethod.POST)
-    public String parsing(@RequestParam String start, @RequestParam String end, Map<String, Object> model) {
+    public String parsing(@RequestParam String start, Map<String, Object> model) {
         ParserService parserService = new ParserService();
-        for (int i = Integer.parseInt(start); i < Integer.parseInt(end); i++) {
+        for (int i = Integer.parseInt(start); i < Integer.parseInt(start)+1; i++) {
             try {
                 String[] res = parserService.parsePage(i).split("\\|");
                 if(!res[0].equals("null") && movieRepository.findByName(res[0]) == null) {

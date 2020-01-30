@@ -75,7 +75,7 @@
                                 <td th:text="${genre.id}">...</td>
                                 <td th:text="${genre.genreName}">...</td>
 
-                                <td><a href="#" th:href="@{${genre.id} + '/genresInfoAdmin'}">Info</a></td>
+                                <td><a href="#" th:href="@{'/genresInfoAdmin/'+ ${genre.id}}">Info</a></td>
                                 <td><a href="#" th:href="@{${genre.id} + '/genresEditAdmin'}">Edit</a></td>
                             </tr>
                         </table>

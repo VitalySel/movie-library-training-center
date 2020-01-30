@@ -67,10 +67,9 @@
                 <div class="form">
                     <form class="login-form" th:action="@{/dataParsing}" method="post">
                         <div th:if="${message} != null" th:each="mess : ${message}" th:utext="${mess}"></div>
-                        <div><input type="number" placeholder="id start" name="start" id="start"/></div>
-                        <div><input type="number" placeholder="id end" name="end" id="end"/></div>
+                        <div><input type="number" placeholder="enter id movie" name="start" id="start"/></div>
                         <input type="hidden" name="_csrf" value="${_csrf.token}" />
-                        <button type="submit">Parsing</button>
+                        <button type="submit">Review</button>
                         <p class="message">Admin page?<a th:href="@{/admin}">Admin</a></p>
                         <p class="message">Movie List?<a th:href="@{/movieAdmin}">Movies</a></p>
                     </form>

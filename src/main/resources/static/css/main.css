@@ -230,7 +230,7 @@ a:active {
 
 
 #hero-area {
-    padding:180px 0;
+    padding:200px 0;
     background: rgba(0, 0, 0, 0) linear-gradient(135deg, #8ec64e 0%, #41aba0 100%) repeat scroll 0 0;
 
 }
@@ -436,7 +436,7 @@ a:active {
 
 #service {
     text-align: center;
-    background: #f9f9f9;
+    background: rgba(0, 0, 0, 0) linear-gradient(135deg, #8ec64e 0%, #41aba0 100%) repeat scroll 0 0;
 }
 
 .service {
@@ -493,22 +493,6 @@ a:active {
     position: relative;
     top: 12px;
     width: 75px;
-    -webkit-transform: rotate(50deg);
-       -moz-transform: rotate(50deg);
-        -ms-transform: rotate(50deg);
-         -o-transform: rotate(50deg);
-            transform: rotate(50deg);
-background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#8ec64e), color-stop(100%,#41aba0));
-  background: -webkit-linear-gradient(-45deg, #8ec64e 0%,#41aba0 100%);
-  background: -o-linear-gradient(-45deg, #8ec64e 0%,#41aba0 100%);
-  background: -ms-linear-gradient(-45deg, #8ec64e 0%,#41aba0 100%);
-  background: linear-gradient(135deg, #8ec64e 0%,#41aba0 100%);
-  -webkit-transition: all 0.2s ease-in;
-  -moz-transition: all 0.2s ease-in;
-  -o-transition: all 0.2s ease-in;
-  -ms-transition: all 0.2s ease-in;
-  -khtml-transition: all 0.2s ease-in;
-  transition: all 0.2s ease-in;
 }
 
 .service:hover .icon-box .icon {
@@ -666,6 +650,9 @@ background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#8ec6
 
 #contact {
 
+    padding:150px 0;
+    background: rgba(0, 0, 0, 0) linear-gradient(135deg, #8ec64e 0%, #41aba0 100%) repeat scroll 0 0;
+
 }
 hr {
     border: none;
@@ -764,4 +751,13 @@ footer p a {
 }
 footer p a:hover {
   color: #fff;
+}
+
+.button {
+    width: 170px;
+    text-align: center;
+}
+.b {
+    width: 68px;
+    height: 35px;
 }
