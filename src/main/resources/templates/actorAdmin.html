@@ -79,7 +79,7 @@
 
                                 <td><a href="#" th:href="@{'/actorInfoAdmin/' + ${actor.id}}">Info</a></td>
                                 <td><a href="#" th:href="@{${actor.id} + '/actorEditAdmin'}">Edit</a></td>
-                                <td><a href="#" th:href="@{${actor.id} + '/addActorGenres'}">Add Genres</a></td>
+                                <td><a href="#" th:href="@{ '/addActorGenres/' + ${actor.id}}">Add Genres</a></td>
                             </tr>
                         </table>
                         <div class="wow fadeInDown" data-wow-delay="0.3s">
