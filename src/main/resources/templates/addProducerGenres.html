@@ -22,10 +22,7 @@
     <link rel="stylesheet" th:href="@{/css/owl.carousel.css}">
     <link rel="stylesheet" th:href="@{/css/animate.css}">
     <link rel="stylesheet" th:href="@{/css/main.css}">
-
     <link rel="stylesheet" th:href="@{/css/login.css}">
-
-
     <!-- Responsive Stylesheet -->
     <link rel="stylesheet" th:href="@{/css/responsive.css}">
 </head>
@@ -61,28 +58,36 @@
 </div>
 
 <section id="hero-area">
-    <div class="container_login">
+    <div class="container">
         <div class="row">
-            <div class="login-page">
-                <div class="form">
-                    <form class="login-form" th:action="@{/addProducerGenre}" method="post">
-                        <ul th:each = "producer:${producers}">
-                            <li th:utext="${producer.name}">...</li>
-                            </br>
-                            <div><div class="bgw"><input type="text" placeholder="enter genre(s) separate by comma " name="genreName" id="genreName"/></div></div>
-                            <input type="hidden" name="_csrf" value="${_csrf.token}" />
-                            <input type="hidden" th:value="@{${producer.id}}" name="producerId">
-                            <button type="submit">Add Genres</button>
-                            <p class="message">Producer List?<a th:href="@{/producerAdmin}">Producers</a></p>
-                            <p class="message">Genre List?<a th:href="@{/genresAdmin}">Genres</a></p>
-                            <p class="message">Admin page?<a th:href="@{/admin}">Admin</a></p>
-                        </ul>
-                    </form>
+            <div class="col-md-6">
+                <div class="block">
+                    <div class="caption" th:each="producer:${producers}">
+                        <h1 class="wow" th:text="${producer.name}">...</h1>
+                        <table class="table">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col"><p class="">ID</p></th>
+                                <th scope="col"><p class="">Name</p></th>
+                            </tr>
+                            </thead>
+                            <tr th:each="genre : ${genres}">
+                                <td th:text="${genre.id}">...</td>
+                                <td th:text="${genre.genreName}">...</td>
+
+
+                                <td><a href="#" th:href="@{'/addProducerGenres/' +  ${producer.id} + '/' + ${genre.id}}">Add to producer</a></td>
+                            </tr>
+                        </table>
+                        <div class="" data-wow-delay="0.3s">
+                            <a class="btn btn-default btn-home" th:href="@{/admin}" role="button">Admin Page</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div><!-- .row close -->
     </div><!-- .container close -->
-</section><!-- header close -->
+</section>
 
 <footer>
     <div class="container">
@@ -95,3 +100,20 @@
         </div>
     </div>
 </footer>
+
+<script th:src="@{/js/vendor/modernizr-2.6.2.min.js}"></script>
+<script th:src="@{/js/vendor/jquery-1.10.2.min.js}"></script>
+<script th:src="@{/js/jquery.lwtCountdown-1.0.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/jquery.validate.min.js}"></script>
+<script th:src="@{/js/jquery.form.js}"></script>
+<script th:src="@{/js/jquery.nav.js}"></script>
+<script th:src="@{/js/jquery.sticky.js}"></script>
+<script th:src="@{/js/plugins.js}"></script>
+<script th:src="@{/js/wow.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+
+</body>
+</html>
+</html>

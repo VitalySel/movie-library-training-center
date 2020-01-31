@@ -353,22 +353,31 @@ public class AdminController {
         return "redirect:" + actorId + "/actorInfoAdmin";
     }
 
-    @RequestMapping(value = {"{producerid}/addProducerGenres"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/addProducerGenres/{producerid}"}, method = RequestMethod.GET)
     public String addProducerGenres(@PathVariable String producerid, Model model) throws NotFoundException {
         Producer producer = producerService.getProducerId(Integer.parseInt(producerid));
         model.addAttribute("producers",producer);
+        model.addAttribute("genres",genresRepository.findAll());
         return "addProducerGenres";
     }
 
 
-    @RequestMapping(value = {"addProducerGenre"}, method = RequestMethod.POST)
-    public String addProducerGenreForm(@RequestParam String producerId, @RequestParam String genreName) throws NotFoundException {
-        List<String> genreNameInput = Arrays.asList(genreName.split(","));
-        Producer producer = producerService.getProducerId(Integer.parseInt(producerId));
-        producer.setGenres(genresService.findGenreName(genreNameInput));
+    @RequestMapping(value = {"/addProducerGenres/{producerid}/{genreid}"}, method = RequestMethod.GET)
+    public String addProducerGenreForm(@PathVariable("producerid") String producerid, @PathVariable("genreid") String genreid) throws Exception {
+        Producer producer = producerService.getProducerId(Integer.parseInt(producerid));
+        List<Genres> genresList = producer.getGenres();
+
+        if (genresList.contains(genresRepository.findById(Integer.parseInt(genreid)))){
+            return "redirect:/addProducerGenres/" + producerid;
+        }
+        producer.addGenres(genresService.getGenresId(Integer.parseInt(genreid)));
         producerService.update(producer);
-        return "redirect:" + producerId + "/producerInfoAdmin";
+
+        return "redirect:/addProducerGenres/" + producerid;
     }
+
+
 
     @RequestMapping(value = "/dataParsing",method = RequestMethod.GET)
     public String parsing(Model model){
