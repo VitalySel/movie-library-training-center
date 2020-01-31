@@ -8,6 +8,7 @@ import com.seliverstov.movier.service.GenresService;
 import com.seliverstov.movier.service.MovieService;
 import com.seliverstov.movier.service.ProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,21 +36,21 @@ public class GenreController {
     @GetMapping(value = "/movie/genre")
     public String genreFilterMovie(@RequestParam String id, Model model) throws Exception {
         model.addAttribute("moviesGenres", movieService.findMovieByGenre(Integer.parseInt(id)));
-        model.addAttribute("genres",genresRepository.findAll());
+        model.addAttribute("genres",genresRepository.findAll(Sort.by(Sort.Direction.ASC,"genreName")));
         return "genreMovie";
     }
 
     @GetMapping(value = "/actor/genre")
     public String genreFilterActor(@RequestParam String id,Model model) {
         model.addAttribute("actorsGenres",actorService.findActorByGenres(Integer.parseInt(id)));
-        model.addAttribute("genres",genresRepository.findAll());
+        model.addAttribute("genres",genresRepository.findAll(Sort.by(Sort.Direction.ASC,"genreName")));
         return "genreActor";
     }
 
     @GetMapping(value = "/producer/genre")
     public String genreFilterProducer(@RequestParam String id,Model model) {
         model.addAttribute("producersGenres",producerService.findProducerByGenres(Integer.parseInt(id)));
-        model.addAttribute("genres",genresRepository.findAll());
+        model.addAttribute("genres",genresRepository.findAll(Sort.by(Sort.Direction.ASC,"genreName")));
         return "genreProducer";
     }
 }

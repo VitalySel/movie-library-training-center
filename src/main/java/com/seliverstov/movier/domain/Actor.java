@@ -29,9 +29,6 @@ public class Actor {
     @Column(name = "photo")
     private String photo;
 
-    @Column(name = "active")
-    private boolean active;
-
     @ManyToMany(mappedBy = "actors")
     private Set<Movie> movie = new HashSet<>();
 
@@ -130,11 +127,4 @@ public class Actor {
         this.photo = photo;
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
 }

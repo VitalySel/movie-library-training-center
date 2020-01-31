@@ -3,6 +3,7 @@ package com.seliverstov.movier.controller;
 import com.seliverstov.movier.repository.GenresRepository;
 import com.seliverstov.movier.repository.ProducerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,12 +29,12 @@ public class ProducerController {
 
         if (name.isEmpty() && producerRepository.findByName(name) == null) {
             model.addAttribute("message", "Producer not exists");
-            model.addAttribute("genres",genresRepository.findAll());
+            model.addAttribute("genres",genresRepository.findAll(Sort.by(Sort.Direction.ASC,"genreName")));
             return "searchProducer";
         }
 
         model.addAttribute("producers",producerRepository.findByName(name));
-        model.addAttribute("genres",genresRepository.findAll());
+        model.addAttribute("genres",genresRepository.findAll(Sort.by(Sort.Direction.ASC,"genreName")));
         return "searchProducer";
     }
 }

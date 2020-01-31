@@ -37,8 +37,8 @@ public class Movie {
     @Column(name = "poster")
     private String poster;
 
-    @Column(name = "active")
-    private boolean active;
+    @Column(name = "rating")
+    private double rating;
 
     @ManyToMany
     @JoinTable(name = "movie_genres",
@@ -166,12 +166,12 @@ public class Movie {
         this.poster = poster;
     }
 
-    public boolean isActive() {
-        return active;
+    public double getRating() {
+        return rating;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 
     @Override

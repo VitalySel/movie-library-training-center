@@ -70,7 +70,9 @@
                             <p class="wow fadeInDown">Duration:</p>
                             <h3><li th:utext="${movie.duration}">...</li></h3>
                             <p class="wow fadeInDown">Box Office:</p>
-                            <h3><li th:utext="${movie.budget + '$'}">...</li></h3>
+                            <h3><li th:utext="${movie.budget}">...</li></h3>
+                            <p class="wow fadeInDown">iMDb:</p>
+                            <h3><li th:utext="${movie.rating}">...</li></h3>
                             <p class="wow fadeInDown">Genres:</p>
                             <h3><li th:each="genre:${movie.genres}" th:utext="${(genre.getGenreName())}">...</li></h3>
                             <p class="wow fadeInDown">Description:</p>

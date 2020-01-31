@@ -397,8 +397,8 @@ public class AdminController {
             try {
                 String[] res = parserService.parsePage(i).split("\\|");
                 if(!res[0].equals("null") && movieRepository.findByName(res[0]) == null) {
-                    if (producerRepository.findByName(res[9]) == null) {
-                        String[] prod = parserService.parsDirector(res[10]).split("\\|");
+                    if (producerRepository.findByName(res[10]) == null) {
+                        String[] prod = parserService.parsDirector(res[11]).split("\\|");
                         Producer producer;
 
                         if (prod.length > 3) {
@@ -411,9 +411,9 @@ public class AdminController {
                         }
                     }
 
-                    Movie movie = new Movie(res[0], res[4], res[7], res[2], res[3], producerRepository.findByName(res[9]), res[5]);
+                    Movie movie = new Movie(res[0], res[4], res[8], res[2], res[3], producerRepository.findByName(res[10]), res[5]);
 
-                    String[] actors = res[8].split(",");
+                    String[] actors = res[9].split(",");
                     for (int j = 0; j < (actors.length > 3 ? 3 : actors.length); j++) {
                         Actor actor;
                         String[] act = parserService.parsDirector(actors[j]).split("\\|");
@@ -429,7 +429,7 @@ public class AdminController {
                             else actor = new Actor(act[0], act[2], act[1]);
                         }
 
-                        String[] genres = res[6].split(",");
+                        String[] genres = res[7].split(",");
                         for (int k = 0; k < (genres.length > 1 ? 1 : genres.length); k++) {
                             Genres genres1;
                             if(genresRepository.findBygenreName(genres[k]) != null) {
@@ -445,8 +445,8 @@ public class AdminController {
                             if(!movie.getGenres().contains(genres1)){
                                 movie.addGenres(genres1);
                             }
-                            if(!producerRepository.findByName(res[9]).getGenres().contains(genres1)){
-                                Producer producer = producerRepository.findByName(res[9]);
+                            if(!producerRepository.findByName(res[10]).getGenres().contains(genres1)){
+                                Producer producer = producerRepository.findByName(res[10]);
                                 producer.addGenres(genres1);
                                 producer.addMovies(movie);
                                 producerRepository.save(producer);
@@ -456,6 +456,15 @@ public class AdminController {
                         actorRepository.save(actor);
                         movie.addActor(actor);
                     }
+
+                    String [] ratings = res[6].split(",");
+                    if (ratings[3] != "-") {
+                        movie.setRating(Double.parseDouble(ratings[3]));
+                    }
+                    else {
+                        movie.setRating(0);
+                    }
+
                     movieRepository.save(movie);
                 }
                 else {
