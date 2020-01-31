@@ -64,7 +64,6 @@
                 <div class="block">
                     <div class="caption" th:each="movie:${movies}">
                         <h1 class="wow" th:text="${movie.name}">...</h1>
-                        <div th:if="${message} != null" th:utext="${message}"><p></p></div>
                         <table class="table">
                             <thead class="thead-light">
                             <tr>

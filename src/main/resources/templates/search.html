@@ -95,7 +95,7 @@
                         <div class="sub-heading">
                             <a href="#" th:href="@{'/movierInfoAdmin/'+ ${movie.id}}"><h4 th:text="${movie.name}"></h4></a>
                             <a href="#" th:href="@{'/producerInfoAdmin/'+${movie.producers.getId()}}"><p th:utext="${movie.producers.getName()}"></p></a>
-                            <a href="#" th:each= "genre:${movie.genres}" th:href="@{'/genresInfoAdmin/' + ${genre.getId()}}"><p th:each="genre:${movie.genres}" th:utext="${(genre.getGenreName())}"></p></a>
+                            <p th:utext="${movie.duration}"></p>
                         </div>
                     </div>
 

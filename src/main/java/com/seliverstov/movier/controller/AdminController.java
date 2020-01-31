@@ -315,20 +315,26 @@ public class AdminController {
         return "redirect:" + genreId + "/genresInfoAdmin";
     }
 
-    @RequestMapping(value = {"{movieid}/addMovieGenres"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/addMovieGenres/{movieid}"}, method = RequestMethod.GET)
     public String addMovieGenres(@PathVariable String movieid, Model model) throws NotFoundException {
         Movie movie = movieService.getMovieId(Integer.parseInt(movieid));
         model.addAttribute("movies",movie);
+        model.addAttribute("genres",genresRepository.findAll());
         return "addMovieGenres";
     }
 
-    @RequestMapping(value = {"addMovieGenre"}, method = RequestMethod.POST)
-    public String addMovieGenreForm(@RequestParam String movieId, @RequestParam String genreName) throws NotFoundException {
-        List<String> genreNameInput = Arrays.asList(genreName.split(","));
+    @RequestMapping(value = {"/addMovieGenres/{movieid}/{genreid}"}, method = RequestMethod.GET)
+    public String addMovieGenreForm(@PathVariable("movieid") String movieId, @PathVariable("genreid") String genreid) throws Exception {
         Movie movie = movieService.getMovieId(Integer.parseInt(movieId));
-        movie.setGenres(genresService.findGenreName(genreNameInput));
+        List<Genres> genresList = movie.getGenres();
+
+        if (genresList.contains(genresRepository.findById(Integer.parseInt(genreid)))){
+            return "redirect:/addMovieGenres/" + movieId;
+        }
+
+        movie.addGenres(genresService.getGenresId(Integer.parseInt(genreid)));
         movieService.update(movie);
-        return "redirect:" + movieId + "/movierInfoAdmin";
+        return "redirect:/addMovieGenres/" + movieId;
     }
 
     @RequestMapping(value = {"{actorid}/addActorGenres"}, method = RequestMethod.GET)

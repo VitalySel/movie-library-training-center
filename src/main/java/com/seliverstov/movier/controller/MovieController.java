@@ -1,5 +1,6 @@
 package com.seliverstov.movier.controller;
 
+import com.seliverstov.movier.domain.Genres;
 import com.seliverstov.movier.domain.User;
 import com.seliverstov.movier.repository.GenresRepository;
 import com.seliverstov.movier.repository.MovieRepository;
@@ -11,6 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class MovieController {
