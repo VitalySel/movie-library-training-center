@@ -119,6 +119,7 @@ public class AdminController {
 
     @RequestMapping(value = {"/addMovieAdmin"},method = RequestMethod.GET)
     public String addMovieAdmin(Model model) {
+        model.addAttribute("producers", producerRepository.findAll());
         return "addMovieAdmin";
     }
 
@@ -242,20 +243,21 @@ public class AdminController {
         return "redirect:" + actorId + "/actorInfoAdmin";
     }
 
-    @RequestMapping(value = {"{movieid}/addMovieActor"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/addMovieActors/{movieid}"}, method = RequestMethod.GET)
     public String addMovieActor(@PathVariable String movieid, Model model) throws NotFoundException {
         Movie movie = movieService.getMovieId(Integer.parseInt(movieid));
         model.addAttribute("movies",movie);
-        return "addMovieActor";
+        model.addAttribute("actors", actorRepository.findAll());
+        return "addMovieActors";
     }
 
-    @RequestMapping(value = {"addMovieActor"}, method = RequestMethod.POST)
-    public String addMovieActorForm(@RequestParam String movieId, @RequestParam String actorName) throws NotFoundException {
-        List<String> actorNameInput = Arrays.asList(actorName.split(","));
-        Movie movie = movieService.getMovieId(Integer.parseInt(movieId));
-        movie.setActors(actorService.findActorName(actorNameInput));
+    @RequestMapping(value = {"/addMovieActors/{movieid}/{actorid}"}, method = RequestMethod.GET)
+    public String addMovieActorForm(@PathVariable("movieid") String movieid, @PathVariable("actorid") String actorid) throws NotFoundException {
+        Movie movie = movieService.getMovieId(Integer.parseInt(movieid));
+
+        movie.addActor(actorService.getActorId(Integer.parseInt(actorid)));
         movieService.update(movie);
-        return "redirect:" + movieId + "/movierInfoAdmin";
+        return "redirect:/addMovieActors/" + movieid;
     }
 
     @RequestMapping(value = "/genresAdmin",method = RequestMethod.GET)
