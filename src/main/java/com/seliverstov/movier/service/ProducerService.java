@@ -1,13 +1,16 @@
 package com.seliverstov.movier.service;
 
+import com.seliverstov.movier.domain.Actor;
 import com.seliverstov.movier.domain.Movie;
 import com.seliverstov.movier.domain.Producer;
+import com.seliverstov.movier.repository.GenresRepository;
 import com.seliverstov.movier.repository.ProducerRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +19,8 @@ public class ProducerService {
 
     @Autowired
     private ProducerRepository produserRepository;
+    @Autowired
+    private GenresRepository genresRepository;
 
     public Producer getProducerId(int id) throws NotFoundException {
 
@@ -37,5 +42,10 @@ public class ProducerService {
 
     public void update(Producer producer) {
         produserRepository.save(producer);
+    }
+
+    public List<Producer> findProducerByGenres(int id) {
+        List<Producer> producers = new ArrayList<>(genresRepository.findById(id).getProducers());
+        return producers;
     }
 }

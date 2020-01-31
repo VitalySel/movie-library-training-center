@@ -3,6 +3,7 @@ package com.seliverstov.movier.service;
 import com.seliverstov.movier.domain.Actor;
 import com.seliverstov.movier.domain.Movie;
 import com.seliverstov.movier.repository.ActorRepository;
+import com.seliverstov.movier.repository.GenresRepository;
 import com.seliverstov.movier.repository.MovieRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,13 @@ import java.util.*;
 public class ActorService {
 
     @Autowired
-    ActorRepository actorRepo;
+    private ActorRepository actorRepo;
 
     @Autowired
-    MovieRepository movieRepo;
+    private MovieRepository movieRepo;
+
+    @Autowired
+    private GenresRepository genresRepository;
 
 
     public List<Actor> findByMovieId(int id){
@@ -46,5 +50,10 @@ public class ActorService {
 
     public void save(Actor actor){
         actorRepo.save(actor);
+    }
+
+    public List<Actor> findActorByGenres(int id) {
+        List<Actor> actors = new ArrayList<>(genresRepository.findById(id).getActors());
+        return actors;
     }
 }

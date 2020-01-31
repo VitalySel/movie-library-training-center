@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
 
+
+
     <!-- CSS -->
 
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
@@ -57,18 +59,46 @@
     </div><!-- /.container-fluid -->
 </div>
 
-<section id="hero-area" class="section">
+<section id="contact" class="section">
     <div class="container">
         <div class="row">
-            <h1 class="wow fadeInDown">Producers</h1>
-            <div th:each="producer:${producers}">
-                <div class="col-md-7 col-sm-12 wow fadeInLeft">
-                    <div class="sub-heading">
-                        <a href="#" th:href="@{${producer.id} + '/producerInfoAdmin'}"><h3 th:text="${producer.name}"></h3></a>
-                    </div>
+            <div class="block">
+                <h1 class="wow fadeInDown">Genres</h1>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-2 wow fadeInLeft">
+                <div class="block">
+                    <ul th:each = "genre:${genres}">
+                        <form method="get" action="/producer/genre" >
+                            <li>
+                                <input type="hidden" name="id" th:value="${genre.id}">
+                                <button type="submit" class="button btn btn-default btn-home ml-4" th:utext="${genre.genreName}"></button>
+                            </li>
+                        </form>
+                    </ul>
                 </div>
-                <div class="col-md-5 col-sm-12 wow fadeInLeft" data-wow-delay="0.3s">
-                    <img th:src="${producer.photo}" width="100" height="141" class="img-responsive">
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-1 wow fadeInUp" data-wow-delay="0.3s">
+
+                <div class="form-group col-md-6">
+                    <form method="get" action="/producer/search" class="form-inline">
+                        <input type="text" name="name" class="form-control" value="" placeholder="Search by name producer">
+                        <button type="submit" class="b btn ">Search</button>
+                    </form>
+                </div>
+
+
+                <div th:each="producer:${producers}">
+                    <div class="col-md-8 col-sm-12 wow fadeInLeft">
+                        <div class="sub-heading">
+                            <a href="#" th:href="@{'/producerInfoAdmin/'+ ${producer.id}}"><h4 th:text="${producer.name}"></h4></a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 col-sm-12 wow fadeInLeft" data-wow-delay="0.3s" th:if="${producer.photo} != null ">
+                        <img th:src="${producer.photo}" width="100" height="141" class="img-responsive">
+                    </div>
                 </div>
             </div>
         </div>

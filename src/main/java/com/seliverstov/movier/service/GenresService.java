@@ -1,6 +1,8 @@
 package com.seliverstov.movier.service;
 
+import com.seliverstov.movier.domain.Actor;
 import com.seliverstov.movier.domain.Genres;
+import com.seliverstov.movier.repository.ActorRepository;
 import com.seliverstov.movier.repository.GenresRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ public class GenresService {
 
     @Autowired
     private GenresRepository genresRepository;
+    @Autowired
+    private ActorRepository actorRepository;
 
     public Genres getGenresName(String name) throws Exception {
         Genres genres = genresRepository.findBygenreName(name);
@@ -48,4 +52,14 @@ public class GenresService {
     public void save(Genres genres) {
         genresRepository.save(genres);
     }
+
+   /* public Set<Genres> GenresDistinctByActors(){
+
+        List<Actor> actorsList = actorRepository.findAll();
+        Set<Genres> genresSet = new HashSet<>();
+        for (Actor actor: actorsList) {
+            genresSet.addAll(actor.getGenres());
+        }
+        return genresSet;
+    }*/
 }
