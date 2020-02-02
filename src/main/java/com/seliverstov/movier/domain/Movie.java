@@ -3,10 +3,7 @@ package com.seliverstov.movier.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "movie")
@@ -55,6 +52,9 @@ public class Movie {
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "movies")
     private Producer producers;
+
+    /*@ManyToMany(mappedBy = "favoriteMovies")
+    private List<User> userList = new ArrayList<>();*/
 
     public Movie() {
     }
@@ -177,5 +177,25 @@ public class Movie {
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Movie movie = (Movie) obj;
+        return Objects.equals(id,movie.id) &&
+                Objects.equals(name, movie.name) &&
+                Objects.equals(releaseDate, movie.releaseDate) &&
+                Objects.equals(description, movie.description) &&
+                Objects.equals(duration, movie.duration) &&
+                Objects.equals(budget,movie.budget) &&
+                Objects.equals(poster,movie.poster) &&
+                Objects.equals(rating,movie.rating);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id,name,releaseDate,description,duration,budget,poster,rating);
     }
 }

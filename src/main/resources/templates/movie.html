@@ -88,9 +88,8 @@
                     </form>
                 </div>
 
-
                 <div th:each="movie:${movies}">
-                    <div class="col-md-8 col-sm-12 wow fadeInLeft">
+                    <div class="col-md-7 col-sm-12 wow fadeInLeft">
                         <div class="sub-heading">
                             <a href="#" th:href="@{'/movierInfoAdmin/'+ ${movie.id}}"><h4 th:text="${movie.name}"></h4></a>
                             <a href="#" th:href="@{'/producerInfoAdmin/'+${movie.producers.getId()}}"><p th:utext="${movie.producers.getName()}"></p></a>
@@ -101,6 +100,14 @@
                     <div class="col-md-2 col-sm-12 wow fadeInLeft" data-wow-delay="0.3s" th:if="${movie.poster} != null ">
                         <img th:src="${movie.poster}" width="100" height="141" class="img-responsive">
                     </div>
+
+                    <div class="col-md-1 col-sm-12 wow fadeInLeft" data-wow-delay="0.3s" th:if="${movie.id} != null ">
+                        <form method="get" th:action="addMovieUsrList" >
+                            <input type="hidden" name="movieid" th:value="${movie.id}">
+                            <button type="submit" class="btn btn-link" title="Add favorite movie"><img src="https://img.icons8.com/android/24/000000/like.png"></button>
+                        </form>
+                    </div>
+
                 </div>
             </div>
         </div>

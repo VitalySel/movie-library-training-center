@@ -5,8 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.Collection;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "usr")
@@ -29,6 +28,13 @@ public class User implements UserDetails {
     @CollectionTable(name = "usr_role", joinColumns = @JoinColumn(name = "usr_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
+
+    /*@ManyToMany
+    @JoinTable(name = "usr_favorite_movie",
+            joinColumns = {@JoinColumn(name = "usr_id",referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "movie_id", referencedColumnName = "idmovies")})
+    private Set<Movie> favoriteMovies = new HashSet<>();*/
+
 
     @Override
     public boolean isAccountNonExpired() {
@@ -139,4 +145,18 @@ public class User implements UserDetails {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
+
+
+    /*public Set<Movie> getFavoriteMovies() {
+        return favoriteMovies;
+    }
+
+    public void setFavoriteMovies(Set<Movie> favoriteMovies) {
+        this.favoriteMovies = favoriteMovies;
+    }
+
+    public void addFavoriteMovies(Movie movie) {
+       this.favoriteMovies.add(movie);
+    }*/
+
 }

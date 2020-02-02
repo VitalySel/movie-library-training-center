@@ -1,7 +1,8 @@
 package com.seliverstov.movier.service;
 
-import com.seliverstov.movier.domain.Role;
-import com.seliverstov.movier.domain.User;
+import com.seliverstov.movier.domain.*;
+import com.seliverstov.movier.repository.MovieCartRepository;
+import com.seliverstov.movier.repository.MovieRepository;
 import com.seliverstov.movier.repository.UserRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +12,20 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
+
     @Autowired
     private UserRepository userRepo;
+    @Autowired
+    private MovieCartRepository movieCartRepository;
+    @Autowired
+    private MovieRepository movieRepository;
 
     @Autowired
     private MailService mailService;
@@ -79,4 +87,47 @@ public class UserService implements UserDetailsService {
     public void update(User user){
         userRepo.save(user);
     }
+
+    public void sendMailMovies(User user) {
+
+        userRepo.findByUsername(user.getUsername());
+
+        StringBuilder movieSend = new StringBuilder();
+        String thanks = "\n \n" +
+                "Thank you for your list movie in our movier, waiting for moviegoers again!!!";
+
+        Optional<MovieCart> cart = movieCartRepository.findByUser(user);
+        List<Item> items = cart.get().getItems();
+        List<Movie> movies = new ArrayList<>();
+        for (int i = 0; i < items.size(); i++) {
+            Movie movie = movieRepository.findById(items.get(i).getMovieId());
+            movies.add(movie);
+        }
+        for (int i = 0; i < movies.size(); i++) {
+            Movie movie = movies.get(i);
+            movieSend.append("Film name: ")
+                    .append(movie.getName())
+                    .append("  \n")
+                    .append("Duration: ")
+                    .append(movie.getDuration())
+                    .append("  \n")
+                    .append("Rating: ")
+                    .append(movie.getRating())
+                    .append("  \n")
+                    .append("Producer: ")
+                    .append(movie.getProducers().getName())
+                    .append("  \n \n");
+        }
+        StringBuilder message = new StringBuilder();
+        message.append("Aloha, ")
+                .append(user.getUsername())
+                .append(" ! \n \n")
+                .append("Your favorite movies from our site")
+                .append("  \n \n")
+                .append(movieSend)
+                .append(thanks);
+
+        mailService.send(user.getMail(),"Favorite Movie",message.toString());
+    }
+
 }

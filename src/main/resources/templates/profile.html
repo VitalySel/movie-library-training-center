@@ -70,7 +70,7 @@
                         <p class="wow fadeInDown">Mail:</p>     <li th:utext="${user.mail}"><p class="wow fadeInDown">...</p></li>
                     </ul>
                 </div>
-                    <a th:href="@{/profile/edit}" class="btn btn-default btn-home">Edit</a>
+                    <a th:href="@{/profile/favoriteMovie}" class="btn btn-default btn-home">Favorite Movie</a>
             </div>
             </div>
             <div class="col-md-6 wow zoomIn">
@@ -81,6 +81,7 @@
                         </ul>
                     </div>
                 </div>
+                <a th:href="@{/profile/edit}" class="btn btn-default btn-home">Edit</a>
             </div>
         </div><!-- .row close -->
     </div><!-- .container close -->

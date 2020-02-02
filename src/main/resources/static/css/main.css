@@ -3,6 +3,7 @@
 --*/
 
 body {
+    height: 100%;
     font-family: 'Lato', sans-serif;
     font-size: 14px;
     font-weight: 300;
@@ -736,9 +737,10 @@ hr {
     display: none;
 }
 footer {
+
     text-align: center;
     background: #272727;
-    padding: 27px 0px;
+    padding: 70px 0px;
 }
 footer p {
     font-weight: 300;
