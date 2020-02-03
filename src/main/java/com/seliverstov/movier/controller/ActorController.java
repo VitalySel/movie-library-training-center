@@ -19,15 +19,21 @@ public class ActorController {
 
     @GetMapping(value = "/actors")
     public String actor(Model model){
-        model.addAttribute("genres",genresRepository.findAll());
-        model.addAttribute("actors",actorRepository.findAll());
+        model.addAttribute("genres",genresRepository.findAll(Sort.by(Sort.Direction.ASC,"genreName")));
+        model.addAttribute("actors",actorRepository.findAll(Sort.by(Sort.Direction.ASC,"name")));
         return "actors";
     }
 
     @GetMapping(value = "/actor/search")
     public String searchActor(@RequestParam(required = false, defaultValue = "") String name,Model model) {
 
-        if (name.isEmpty() && actorRepository.findByName(name) == null) {
+        if (name.isEmpty()){
+            model.addAttribute("genres",genresRepository.findAll(Sort.by(Sort.Direction.ASC,"genreName")));
+            model.addAttribute("actors",actorRepository.findAll(Sort.by(Sort.Direction.ASC,"name")));
+            return "searchActor";
+        }
+
+        if (actorRepository.findByName(name) == null) {
             model.addAttribute("message", "Actor not exists");
             model.addAttribute("genres",genresRepository.findAll(Sort.by(Sort.Direction.ASC,"genreName")));
             return "searchActor";

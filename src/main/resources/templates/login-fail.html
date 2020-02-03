@@ -66,13 +66,13 @@
             <div class="login-page">
                 <div class="form">
                     <form class="login-form" th:action="@{/login}" method="post">
-                        <div class="alert alert-success" th:if="${message} != null" th:utext="${message}"></div>
-                        <input type="text" required placeholder="username"  name="username"/>
-                        <input type="password" required placeholder="password"  name="password"/>
+                        <div class="alert alert-danger" th:if="${error} != null" th:utext="${error}"></div>
+                        <input type="text" placeholder="username"  name="username"/>
+                        <input type="password" placeholder="password"  name="password"/>
                         <input type="hidden" name="_csrf" value="${_csrf.token}" />
                         <button type="submit" name="submit" >login</button>
                         <p class="message">Not registered? <a th:href="@{/registration}">Create an account</a>
-                                        <br> Forgot password? <a th:href="@{/forgot}">Edit password</a></p>
+                            <br> Forgot password? <a th:href="@{/forgot}">Edit password</a></p>
                     </form>
                 </div>
             </div>

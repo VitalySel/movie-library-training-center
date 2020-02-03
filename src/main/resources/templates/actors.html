@@ -63,10 +63,10 @@
     <div class="container">
         <div class="row">
             <div class="block">
-                <h1 class="wow fadeInDown">Genres</h1>
+                <h1 class="">Genres</h1>
             </div>
 
-            <div class="col-xs-12 col-sm-12 col-md-2 wow fadeInLeft">
+            <div class="col-xs-12 col-sm-12 col-md-2">
                 <div class="block">
                     <ul th:each = "genre:${genres}">
                         <form method="get" action="/actor/genre" >
@@ -79,7 +79,7 @@
                 </div>
             </div>
 
-            <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-1 wow fadeInUp" data-wow-delay="0.3s">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-1" data-wow-delay="0.3s">
 
                 <div class="form-group col-md-6">
                     <form method="get" action="/actor/search" class="form-inline">
@@ -90,13 +90,13 @@
 
 
                 <div th:each="actor:${actors}">
-                    <div class="col-md-8 col-sm-12 wow fadeInLeft">
+                    <div class="col-md-8 col-sm-12">
                         <div class="sub-heading">
                             <a href="#" th:href="@{'/actorInfoAdmin/'+ ${actor.id}}"><h4 th:text="${actor.name}"></h4></a>
                         </div>
                     </div>
 
-                    <div class="col-md-2 col-sm-12 wow fadeInLeft" data-wow-delay="0.3s" th:if="${actor.photo} != null ">
+                    <div class="col-md-2 col-sm-12 " data-wow-delay="0.3s" th:if="${actor.photo} != null ">
                         <img th:src="${actor.photo}" width="100" height="141" class="img-responsive">
                     </div>
                 </div>

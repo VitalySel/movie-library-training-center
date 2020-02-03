@@ -66,10 +66,11 @@
             <div class="login-page">
                 <div class="form">
                     <form class="login-form" th:action="@{/registration}" method="post">
-                        <div><input type="text" placeholder="username" name="username" id="username"/></div>
-                        <div><input type="text" placeholder="E-mail" name="mail" id="mail"/></div>
-                        <div><input type="text" placeholder="realname" name="realname" id="realname"/></div>
-                        <div><input type="password" placeholder="password" name="password" id="password"/></div>
+                        <div class="alert alert-success" th:if="${message} != null" th:utext="${message}"></div>
+                        <div><input type="text" required placeholder="username" name="username" id="username"/></div>
+                        <div><input type="text" required placeholder="E-mail" name="mail" id="mail"/></div>
+                        <div><input type="text" required placeholder="realname" name="realname" id="realname"/></div>
+                        <div><input type="password" required placeholder="password" name="password" id="password"/></div>
                         <input type="hidden" name="_csrf" value="${_csrf.token}" />
                         <button type="submit">Registration</button>
                         <p class="message">Yes registered? <a th:href="@{/login}">Login</a></p>

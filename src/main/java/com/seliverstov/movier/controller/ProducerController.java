@@ -19,15 +19,21 @@ public class ProducerController {
 
     @GetMapping(value = "/producers")
     public String movie(Model model){
-        model.addAttribute("producers",producerRepository.findAll());
-        model.addAttribute("genres",genresRepository.findAll());
+        model.addAttribute("producers",producerRepository.findAll(Sort.by(Sort.Direction.ASC,"name")));
+        model.addAttribute("genres",genresRepository.findAll(Sort.by(Sort.Direction.ASC,"genreName")));
         return "producers";
     }
 
     @GetMapping(value = "/producer/search")
     public String searchProducer(@RequestParam(required = false, defaultValue = "") String name, Model model) {
 
-        if (name.isEmpty() && producerRepository.findByName(name) == null) {
+        if (name.isEmpty()) {
+            model.addAttribute("producers",producerRepository.findAll(Sort.by(Sort.Direction.ASC,"name")));
+            model.addAttribute("genres",genresRepository.findAll(Sort.by(Sort.Direction.ASC,"genreName")));
+            return "searchProducer";
+        }
+
+        if (producerRepository.findByName(name) == null) {
             model.addAttribute("message", "Producer not exists");
             model.addAttribute("genres",genresRepository.findAll(Sort.by(Sort.Direction.ASC,"genreName")));
             return "searchProducer";

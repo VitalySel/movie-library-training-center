@@ -60,6 +60,7 @@ public class MovieController {
         if (name.isEmpty()) {
             model.addAttribute("movies",movieRepository.findAll());
             model.addAttribute("genres",genresRepository.findAll(Sort.by(Sort.Direction.ASC,"genreName")));
+            return "search";
         }
 
         if (movieRepository.findByName(name) == null) {

@@ -4,6 +4,7 @@ import com.seliverstov.movier.domain.User;
 import com.seliverstov.movier.repository.UserRepository;
 import com.seliverstov.movier.service.MailService;
 import com.seliverstov.movier.service.UserService;
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,12 @@ public class SecurityController {
     @RequestMapping(value="/login")
     public String login(){
         return "/login";
+    }
+
+    @RequestMapping(value = "/login-fail")
+    public String failLogin(Model model) {
+        model.addAttribute("error","Incorrect login or password.");
+        return "login-fail";
     }
 
     @GetMapping(value = "/forgot")
@@ -71,16 +78,28 @@ public class SecurityController {
 
     @PostMapping(value = "/registration")
     public String setUser(@ModelAttribute User user , Map<String,Object> model){
-        User useFromDb = userRepository.findByUsername(user.getUsername());
 
-        if (useFromDb != null) {
-            model.put("message","E-mail уже существует");
+        if (user.getUsername() == null || user.getMail() == null || user.getRealname() == null || user.getPassword() == null) {
+            model.put("message","Please fill all fields");
             return "registration";
         }
 
-        user.setActivationCode(UUID.randomUUID().toString());
-        userService.addUser(user);
-        return "redirect:/login";
+        if (userRepository.findByMail(user.getMail()) != null) {
+            model.put("message","E-mail already exists!");
+            return "registration";
+        }
+
+        if (userRepository.findByUsername(user.getUsername()) != null) {
+            model.put("message","username already exists!");
+            return "registration";
+        }
+
+        else{
+            model.put("message","Check you email. Visit link with activation code");
+            user.setActivationCode(UUID.randomUUID().toString());
+            userService.addUser(user);
+            return "login";
+        }
     }
 
     @GetMapping(value = "/activate/{code}")
