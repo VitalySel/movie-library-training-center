@@ -62,68 +62,27 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="block">
-                    <div class="caption">
-                        <h1 class="wow fadeInDown">Admin Page</h1>
-                        <div class="wow fadeInDown" data-wow-delay="0.3s">
-                            <a class="btn btn-default btn-home" th:href="@{/userList}" role="button">User List</a>
-                            <a class="btn btn-default btn-home" th:href="@{/movieAdmin}" role="button">Movie List</a>
-                        </div>
-                        <div class="wow fadeInDown" data-wow-delay="0.3s">
-                            <a class="btn btn-default btn-home" th:href="@{/producerAdmin}" role="button">Producers List</a>
-                        </div>
-                        <div class="wow fadeInDown" data-wow-delay="0.3s">
-                            <a class="btn btn-default btn-home" th:href="@{/actorAdmin}" role="button">Actors List</a>
-                            <a class="btn btn-default btn-home" th:href="@{/genresAdmin}" role="button">Genres List</a>
-                        </div>
-                        <div class="wow fadeInDown" data-wow-delay="0.3s">
-                            <a class="btn btn-default btn-home" th:href="@{/dataParsing}" role="button">Parsing</a>
-                            <a class="btn btn-default btn-home" th:href="@{/integration}" role="button">SQL</a>
-                        </div>
+                    <div class="form">
+                        <form class="login-form" th:action="@{/integrationSQL}" method="post">
+                            <input type="text" placeholder="enter sql code" name="sql" th:value="${sql}" id="sql"/>
+                            <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                            <button type="submit">Execute</button>
+                        </form>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 wow zoomIn">
+            <div class="col-md-6">
                 <div class="block">
                     <div class="counter text-center">
-                        <ul id="countdown_dashboard">
-                            <li>
-                                <div class="dash">
-                                    <div th:text = "${userCount}">...</div>
-                                    <span class="dash_title">Users</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="dash ">
-                                    <div th:text = "${movieCount}">...</div>
-                                    <span class="dash_title">Movie</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="dash ">
-                                    <div th:text = "${actorCount}">...</div>
-                                    <span class="dash_title">Actors</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="dash ">
-                                    <div th:text = "${producerCount}">...</div>
-                                    <span class="dash_title">Producers</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="dash ">
-                                    <div th:text = "${genresCount}">...</div>
-                                    <span class="dash_title">Genres</span>
-                                </div>
-                            </li>
-                        </ul>
+                        <div th:if="${answers} != null"></div>
+                        <textarea type = "text" style="overflow: auto" name="result" cols="70" rows="12" th:utext="${answers}"></textarea>
                     </div>
+                    <a th:href="@{/admin}" class="btn btn-default btn-home">Admin Page</a>
                 </div>
             </div>
         </div><!-- .row close -->
     </div><!-- .container close -->
 </section>
-
 <footer>
     <div class="container">
         <div class="row">

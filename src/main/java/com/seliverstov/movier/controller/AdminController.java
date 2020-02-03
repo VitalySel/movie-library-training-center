@@ -3,7 +3,6 @@ package com.seliverstov.movier.controller;
 import com.seliverstov.movier.domain.*;
 import com.seliverstov.movier.repository.*;
 import com.seliverstov.movier.service.*;
-import com.sun.org.apache.regexp.internal.RE;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,11 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.validation.Valid;
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Controller
 public class AdminController {
@@ -42,6 +39,8 @@ public class AdminController {
     private ActorService actorService;
     @Autowired
     private GenresService genresService;
+    @Autowired
+    private SqlService sqlService;
 
 
     @Value("${upload.path}")
@@ -477,5 +476,43 @@ public class AdminController {
         }
         return "redirect:/movieAdmin";
     }
+
+    @RequestMapping(value = {"/integration"}, method = RequestMethod.GET)
+    public String integration(){
+        return "/integration";
+    }
+
+    @RequestMapping(value = {"/integrationSQL"}, method = RequestMethod.POST)
+    public String getResult(@RequestParam String sql,Model model) {
+
+        if (sql.isEmpty() || sql == " "){
+            model.addAttribute("message","Sql uncorrect!");
+        }
+
+        String [] res = sql.split(" ");
+        if (sqlService.sqlCheck(res[0])) {
+            if (res[0].equals("SELECT") || res[0].equals("Select") || res[0].equals("select")) {
+                model.addAttribute("sql", sql);
+                model.addAttribute("answers", sqlService.selectData(sql));
+                return "integration";
+            }
+            if (res[0].equals("INSERT") || res[0].equals("Insert") || res[0].equals("insert")) {
+                sqlService.insertData(sql);
+                model.addAttribute("sql", sql);
+                model.addAttribute("answers", sql);
+                return "integration";
+            }
+            if (res[0].equals("UPDATE") || res[0].equals("Update") || res[0].equals("update")) {
+                sqlService.updateData(sql);
+                model.addAttribute("sql", sql);
+                model.addAttribute("answers", sql);
+                return "integration";
+            }
+        }
+        return "integration";
+    }
+
+
+
 
 }
