@@ -3,6 +3,8 @@ package com.seliverstov.movier.repository;
 import com.seliverstov.movier.domain.Genres;
 import com.seliverstov.movier.domain.Movie;
 import com.seliverstov.movier.domain.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -17,7 +19,6 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     Movie findById(int id);
     Movie findByName(String name);
-
     List<Movie> findByGenres(int id);
 
 }

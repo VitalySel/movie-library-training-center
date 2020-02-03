@@ -53,9 +53,6 @@ public class Movie {
     @JoinColumn(name = "movies")
     private Producer producers;
 
-    /*@ManyToMany(mappedBy = "favoriteMovies")
-    private List<User> userList = new ArrayList<>();*/
-
     public Movie() {
     }
 

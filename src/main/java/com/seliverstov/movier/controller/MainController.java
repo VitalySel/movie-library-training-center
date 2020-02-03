@@ -30,16 +30,6 @@ public class MainController {
 
     @RequestMapping(value="/",method = RequestMethod.GET)
     public String main(Map<String, Object> model, @AuthenticationPrincipal User user) {
-       /* User userFromDb = userRepository.findByUsername(user.getUsername());
-
-        if (userFromDb != null) {
-            model.put("username",user.getUsername());
-            model.put("movieCount",movieRepository.count());
-            model.put("actorCount",actorRepository.count());
-            model.put("producerCount",producerRepository.count());
-            return "index";
-        }*/
-
         model.put("movieCount",movieRepository.count());
         model.put("actorCount",actorRepository.count());
         model.put("producerCount",producerRepository.count());
