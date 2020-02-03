@@ -63,8 +63,35 @@ public class UserController {
         return "profileEdit";
     }
     @PostMapping(value = "/profile/edit")
-    public String editProfile(@RequestParam String username,String realname,String mail, @AuthenticationPrincipal User user) {
+    public String editProfile(@RequestParam String username,String realname,String mail, @AuthenticationPrincipal User user,Model model) {
+
+        if (userRepository.findByUsername(user.getUsername()) == null) {
+            return "index";
+        }
+
         User usr = user;
+
+        if (username.isEmpty() || realname.isEmpty() || mail.isEmpty() || username.equals(" ") || realname.equals(" ") || mail.equals(" ")) {
+            model.addAttribute("message", "Incorrect information!");
+            model.addAttribute("users", user);
+            return "/profileEdit";
+        }
+
+        if (!user.getUsername().equals(username)){
+            if (userRepository.findByUsername(username) != null){
+                model.addAttribute("message", "Username already exists!");
+                model.addAttribute("users", user);
+                return "/profileEdit";
+            }
+        }
+        if (!user.getMail().equals(mail)) {
+            if (userRepository.findByMail(mail) != null) {
+                model.addAttribute("message", "Mail already exists!");
+                model.addAttribute("users", user);
+                return "/profileEdit";
+            }
+        }
+
         usr.setRealname(realname);
         usr.setUsername(username);
         usr.setMail(mail);
