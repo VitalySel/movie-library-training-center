@@ -298,7 +298,17 @@ public class AdminController {
     @RequestMapping(value = {"/genresInfoAdmin/{genreid}"},method = RequestMethod.GET)
     public String genresInfoAdmin(@PathVariable String genreid, Model model) throws Exception {
         Genres genres = genresService.getGenresId(Integer.parseInt(genreid));
+        Set<Movie> movies = genres.getMovies();
+        Set<Actor> actors = genres.getActors();
+        Set<Producer> producers = genres.getProducers();
+
         model.addAttribute("genres", genres);
+        model.addAttribute("movies", movies);
+        model.addAttribute("actors", actors);
+        model.addAttribute("producers", producers);
+        model.addAttribute("countActors", sqlService.countActorsGenres(genres.getId()));
+        model.addAttribute("countMovies", sqlService.countMoviesGenres(genres.getId()));
+        model.addAttribute("countProducers", sqlService.countProducersGenres(genres.getId()));
         return "genresInfoAdmin";
     }
 

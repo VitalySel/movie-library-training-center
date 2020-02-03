@@ -63,9 +63,8 @@
             <div class="col-md-6">
                 <div class="block">
                     <div class="caption">
-                        <h1 class="wow fadeInDown">Information Genres</h1>
                         <ul th:each = "genre:${genres}">
-                            <p class="wow fadeInDown">Name:</p> <li th:utext="${genre.genreName}"><p class="wow fadeInDown">...</p></li>
+                            <h1 class="wow fadeInDown" th:utext="${genre.genreName}"></h1>
                         </ul>
                     </div>
                 </div>
@@ -74,9 +73,24 @@
                 <div class="block">
                     <div class="counter text-center">
                         <ul th:each = "genre:${genres}">
-                            <p class="wow fadeInDown">Actors:</p> <!--<li th:each="actor:${genre.actors}" th:utext="${(actor.getName())}"><p class="wow fadeInDown">...</p></li>-->
-                            <p class="wow fadeInDown">Movies:</p>
-                            <p class="wow fadeInDown">Producers:</p>
+                            <form method="get" action="/actor/genre" >
+                                <input type="hidden" name="id" th:value="${genre.id}">
+                                <button type="submit" class="button btn btn-default btn-home ml-4">Actors</button>
+                            </form>
+                            <p class="wow fadeInDown" th:utext="${countActors[0].c}"></p>
+
+                            <form method="get" action="/movie/genre" >
+                                <input type="hidden" name="id" th:value="${genre.id}">
+                                <button type="submit" class="button btn btn-default btn-home ml-4">Movies</button>
+                            </form>
+                            <p class="wow fadeInDown" th:utext="${countMovies[0].c}"></p>
+
+                            <form method="get" action="/producer/genre" >
+                                <input type="hidden" name="id" th:value="${genre.id}">
+                                <button type="submit" class="button btn btn-default btn-home ml-4">Producers</button>
+                            </form>
+                            <p class="wow fadeInDown" th:utext="${countProducers[0].c}"></p>
+                            
                         </ul>
                     </div>
                     <a th:href="@{/genresAdmin}" class="btn btn-default btn-home">Genres List</a>

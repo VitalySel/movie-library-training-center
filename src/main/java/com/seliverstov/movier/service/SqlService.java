@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class SqlService {
@@ -36,6 +37,19 @@ public class SqlService {
         List<String> operations = new ArrayList<String>(Arrays.asList("SELECT","select","Select","INSERT","insert", "Insert", "UPDATE", "update","Update"));
         if (operations.contains(sql)) return true;
         else return false;
+    }
+
+    public List countActorsGenres(int genreid){
+        List count = jdbcOperations.queryForList("SELECT COUNT(*) c FROM actors_genres WHERE genre_idgenres = " + genreid);
+        return count;
+    }
+    public List countMoviesGenres(int genreid){
+        List count = jdbcOperations.queryForList("SELECT COUNT(*) c FROM movie_genres WHERE genres_idgenres = " + genreid);
+        return count;
+    }
+    public List countProducersGenres(int genreid){
+        List count = jdbcOperations.queryForList("SELECT COUNT(*) c FROM producers_genres WHERE genres_idgenres = " + genreid);
+        return count;
     }
 
 }
