@@ -86,8 +86,11 @@
                     <div class="counter text-center">
                         <ul th:each = "movie:${movies}">
                             <p class="wow fadeInDown">Poster:</p>    <li><img th:src="${movie.poster}" class="img-responsive"></li>
-                            <p class="wow fadeInDown">Producer:</p>  <a href="#" th:href="@{${movie.producers.getId()} + '/producerInfoAdmin'}"><li th:utext="${movie.producers.getName()}"><p class="wow fadeInDown">...</p></li></a>
-                            <p class="wow fadeInDown">Actors:</p>    <li th:each="actor:${movie.actors}" th:utext="${(actor.getName())}"><p class="wow fadeInDown">...</p></li>
+                            <p class="wow fadeInDown">Producer:</p>  <a href="#" th:href="@{'/producerInfoAdmin/'+${movie.producers.getId()}}"><li th:utext="${movie.producers.getName()}"><p class="wow fadeInDown">...</p></li></a>
+                        </ul>
+                        <p class="wow fadeInDown">Actors:</p>
+                        <ul th:each="actor:${actors}">
+                            <li><a href="#" th:href="@{'/actorInfoAdmin/'+ ${actor.id}}"><p class="wow fadeInDown" th:utext="${actor.name}"></p></a></li>
                         </ul>
                     </div>
                     <a th:href="@{/movieAdmin}" class="btn btn-default btn-home">Movie List</a>

@@ -73,11 +73,20 @@ li {
     color: #fff;
 }
 
+li a{
+    text-decoration: none;
+}
+
+ul a{
+    text-decoration: none;
+}
+
 td {
     color: #fff;
 }
 
 a {
+    text-decoration: none;
     -webkit-transition: all 0.5s ease-in-out 0s;
     -moz-transition: all 0.5s ease-in-out 0s;
     -o-transition: all 0.5s ease-in-out 0s;
@@ -439,6 +448,10 @@ a:active {
     position: relative;
     overflow: hidden;
     height: 60px;
+}
+
+#hero-area .block .counter ul li a{
+    text-decoration: none;
 }
 /*--
     service start

@@ -153,7 +153,9 @@ public class AdminController {
     @RequestMapping(value = {"/movierInfoAdmin/{movieid}"}, method = RequestMethod.GET)
     public String getMovieInfoAdmin(@PathVariable String movieid, Model model) throws NotFoundException {
         Movie movie = movieService.getMovieId(Integer.parseInt(movieid));
+        Set<Actor> actors = movie.getActors();
         model.addAttribute("movies",movie);
+        model.addAttribute("actors",actors);
         return "movierInfoAdmin";
     }
 
@@ -179,7 +181,11 @@ public class AdminController {
     @RequestMapping(value = {"/producerInfoAdmin/{producerid}"}, method = RequestMethod.GET)
     public String getProducerInfoAdmin(@PathVariable String producerid, Model model) throws NotFoundException {
         Producer producer = producerService.getProducerId(Integer.parseInt(producerid));
+        List<Genres> genres = producer.getGenres();
+        Set<Movie> movies = producer.getMovies();
         model.addAttribute("producers", producer);
+        model.addAttribute("genres", genres);
+        model.addAttribute("movies", movies);
         return "producerInfoAdmin";
     }
 
@@ -209,7 +215,11 @@ public class AdminController {
     @RequestMapping(value = "/actorInfoAdmin/{actorid}",method = RequestMethod.GET)
     public String getActorInfoAdmin(@PathVariable String actorid, Model model) throws NotFoundException {
         Actor actor = actorService.getActorId(Integer.parseInt(actorid));
+        Set<Movie> movies = actor.getMovie();
+        List<Genres> genres = actor.getGenres();
         model.addAttribute("actors", actor);
+        model.addAttribute("movies",movies);
+        model.addAttribute("genres",genres);
         return "actorInfoAdmin";
     }
 

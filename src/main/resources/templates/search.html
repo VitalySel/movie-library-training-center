@@ -98,7 +98,7 @@
                         <div class="sub-heading">
                             <a href="#" th:href="@{'/movierInfoAdmin/'+ ${movie.id}}"><h4 th:text="${movie.name}"></h4></a>
                             <a href="#" th:href="@{'/producerInfoAdmin/'+${movie.producers.getId()}}"><p th:utext="${movie.producers.getName()}"></p></a>
-                            <p th:utext="${movie.duration}"></p>
+                            <p>iMDb:</p> <p th:utext="${movie.rating}"></p>
                         </div>
                     </div>
 

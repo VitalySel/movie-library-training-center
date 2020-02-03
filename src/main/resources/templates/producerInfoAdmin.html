@@ -63,9 +63,8 @@
             <div class="col-md-6">
                 <div class="block">
                     <div class="caption">
-                        <h1 class="wow fadeInDown">Producer</h1>
                         <ul th:each = "producer:${producers}">
-                            <p class="wow fadeInDown">Name:</p> <li th:utext="${producer.name}"><p class="wow fadeInDown">...</p></li>
+                            <h1 class="wow fadeInDown"><li th:utext="${producer.name}">...</li></h1>
                             <p class="wow fadeInDown">Country:</p> <li th:utext="${producer.country}"><p class="wow fadeInDown">...</p></li>
                             <p class="wow fadeInDown">Date of Birthday:</p>     <li th:utext="${producer.date}"><p class="wow fadeInDown">...</p></li>
                         </ul>
@@ -77,8 +76,14 @@
                     <div class="counter text-center">
                         <ul th:each = "producer:${producers}">
                             <p class="wow fadeInDown">Poster:</p>        <li><img th:src="${producer.photo}" alt="poster" class="img-responsive"></li>
-                            <p class="wow fadeInDown">Genres:</p>        <li th:each="genre:${producer.genres}" th:utext="${(genre.getGenreName())}"><p class="wow fadeInDown">...</p></li>
-                            <p class="wow fadeInDown">Movies:</p>        <li th:each="movie:${producer.movies}" th:utext="${(movie.getName())}"><p class="wow fadeInDown">...</p></li>
+                        </ul>
+                        <p class="wow fadeInDown">Genres:</p>
+                        <ul th:each="genre:${genres}">
+                            <li><a href="#" th:href="@{'/genresInfoAdmin/'+ ${genre.id}}"><p class="wow fadeInDown" th:utext="${genre.genreName}"></p></a></li>
+                        </ul>
+                        <p class="wow fadeInDown">Movies:</p>
+                        <ul th:each="movie:${movies}">
+                            <li><a href="#" th:href="@{'/movierInfoAdmin/'+ ${movie.id}}"><p class="wow fadeInDown" th:utext="${movie.name}"></p></a></li>
                         </ul>
                     </div>
                     <a th:href="@{/producerAdmin}" class="btn btn-default btn-home">Producer List</a>
