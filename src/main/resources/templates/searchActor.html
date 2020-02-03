@@ -48,7 +48,7 @@
                 <li><a th:href="@{/actors}">Actors</a></li>
                 <li><a th:href="@{/producers}">Producers</a></li>
                 <li><a th:href="@{/profile}" th:if ="${#authentication.name} != anonymousUser" th:text="${#authentication.name}"> Profile</a></li>
-                <li><a th:href="@{/admin}">Admin Page</a></li>
+                <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin}">Admin Page</a></li>
                 <li sec:authorize="isAuthenticated()">
                     <form th:action="@{/logout}" method="post">
                         <input type="submit" class="btn btn-default navbar-btn" value="Sign Out" />
@@ -68,6 +68,7 @@
 
             <div class="col-xs-12 col-sm-12 col-md-2">
                 <div class="block">
+                    <div class="alert alert-danger" th:if="${message} != null" th:utext="${message}"></div>
                     <ul th:each = "genre:${genres}">
                         <form method="get" action="/actor/genre" >
                             <li>
@@ -85,7 +86,6 @@
                     <form method="get" action="/actor/search" class="form-inline">
                         <input type="text" name="name" class="form-control" value="" placeholder="enter actor name">
                         <button type="submit" class="b btn ">Search</button>
-                        <div th:if="${message} != null" th:utext="${message}"><p></p></div>
                     </form>
                 </div>
 

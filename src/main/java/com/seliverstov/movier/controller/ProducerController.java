@@ -28,6 +28,7 @@ public class ProducerController {
     public String searchProducer(@RequestParam(required = false, defaultValue = "") String name, Model model) {
 
         if (name.isEmpty()) {
+            model.addAttribute("message","String is empty!");
             model.addAttribute("producers",producerRepository.findAll(Sort.by(Sort.Direction.ASC,"name")));
             model.addAttribute("genres",genresRepository.findAll(Sort.by(Sort.Direction.ASC,"genreName")));
             return "searchProducer";
@@ -35,6 +36,7 @@ public class ProducerController {
 
         if (producerRepository.findByName(name) == null) {
             model.addAttribute("message", "Producer not exists");
+            model.addAttribute("producers",producerRepository.findAll(Sort.by(Sort.Direction.ASC,"name")));
             model.addAttribute("genres",genresRepository.findAll(Sort.by(Sort.Direction.ASC,"genreName")));
             return "searchProducer";
         }

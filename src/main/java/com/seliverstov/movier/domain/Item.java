@@ -18,6 +18,10 @@ public class Item {
     public Item() {
     }
 
+    public Item(User user) {
+        this.user=user;
+    }
+
     public Item(int movieId,User user) {
         this.movieId = movieId;
         this.user = user;

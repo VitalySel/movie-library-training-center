@@ -58,7 +58,8 @@ public class MovieController {
     public String movieBySearch(@RequestParam(required = false, defaultValue = "") String name, Model model) {
 
         if (name.isEmpty()) {
-            model.addAttribute("movies",movieRepository.findAll());
+            model.addAttribute("message","String is empty!");
+            model.addAttribute("movies",movieRepository.findAll(Sort.by(Sort.Direction.ASC,"name")));
             model.addAttribute("genres",genresRepository.findAll(Sort.by(Sort.Direction.ASC,"genreName")));
             return "search";
         }
@@ -66,6 +67,7 @@ public class MovieController {
         if (movieRepository.findByName(name) == null) {
             model.addAttribute("name",name);
             model.addAttribute("message", "Movie not exists");
+            model.addAttribute("movies",movieRepository.findAll(Sort.by(Sort.Direction.ASC,"name")));
             model.addAttribute("genres",genresRepository.findAll(Sort.by(Sort.Direction.ASC,"genreName")));
             return "search";
         }

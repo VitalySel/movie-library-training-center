@@ -28,6 +28,7 @@ public class ActorController {
     public String searchActor(@RequestParam(required = false, defaultValue = "") String name,Model model) {
 
         if (name.isEmpty()){
+            model.addAttribute("message","String is empty!");
             model.addAttribute("genres",genresRepository.findAll(Sort.by(Sort.Direction.ASC,"genreName")));
             model.addAttribute("actors",actorRepository.findAll(Sort.by(Sort.Direction.ASC,"name")));
             return "searchActor";
@@ -35,6 +36,7 @@ public class ActorController {
 
         if (actorRepository.findByName(name) == null) {
             model.addAttribute("message", "Actor not exists");
+            model.addAttribute("actors",actorRepository.findAll(Sort.by(Sort.Direction.ASC,"name")));
             model.addAttribute("genres",genresRepository.findAll(Sort.by(Sort.Direction.ASC,"genreName")));
             return "searchActor";
         }

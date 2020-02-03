@@ -69,6 +69,13 @@ ul {
     margin: 0;
     list-style: none;
 }
+li {
+    color: #fff;
+}
+
+td {
+    color: #fff;
+}
 
 a {
     -webkit-transition: all 0.5s ease-in-out 0s;
@@ -265,7 +272,9 @@ a:active {
   background: #fff;
   height: 3px;
   width: 110px;
-
+}
+.caption p {
+    color: #fff;
 }
 
 
@@ -557,7 +566,7 @@ a:active {
 #service .caption p {
     line-height: 1.5;
     font-size: 15px;
-    color: #7e7e7e;
+    color: #fff;
 }
 /*--
     About start
@@ -740,7 +749,7 @@ footer {
 
     text-align: center;
     background: #272727;
-    padding: 70px 0px;
+    padding: 100px 0px;
 }
 footer p {
     font-weight: 300;

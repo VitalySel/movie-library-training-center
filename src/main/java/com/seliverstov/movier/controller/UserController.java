@@ -141,6 +141,12 @@ public class UserController {
 
         Optional<MovieCart> cart = movieCartRepository.findByUser(user);
         List<Item> items = cart.get().getItems();
+
+        if (!cart.isPresent() || items.size() == 0) {
+            model.addAttribute("users",user);
+            model.addAttribute("message","Favorite list is empty");
+            return "/favoriteMovie";
+        }
         List<Movie> movies = new ArrayList<>();
         for (int i = 0; i < items.size(); i++) {
             Movie movie = movieRepository.findById(items.get(i).getMovieId());
@@ -153,13 +159,21 @@ public class UserController {
     }
 
     @PostMapping(value = "/sendMovieUsrList")
-    public String sendMailMovie(@AuthenticationPrincipal User user) {
+    public String sendMailMovie(@AuthenticationPrincipal User user, Model model) {
 
-        if (userRepository.findByUsername(user.getUsername()) == null) {
+        if (userRepository.findByUsername(user.getUsername()) == null || !movieCartRepository.findByUser(user).isPresent()) {
             return "/favoriteMovie";
         }
         User usr = user;
+        Optional<MovieCart> movieCart = movieCartRepository.findByUser(user);
+        List<Item> items = movieCart.get().getItems();
+
+        if (items.size() == 0){
+            model.addAttribute("message","Favorite list is empty");
+            return "redirect:/profile/favoriteMovie";
+        }
+
         userService.sendMailMovies(usr);
-        return "redirect:/profile";
+        return "redirect:/profile/favoriteMovie";
     }
 }
