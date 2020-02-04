@@ -67,7 +67,7 @@
             <div class="login-page">
                 <div class="form">
                     <form class="login-form" th:action="@{/forgot}" method="post">
-                        <input type="text" placeholder="E-mail" name="email"/>
+                        <input type="text" required placeholder="E-mail" name="email"/>
                         <input type="hidden" name="_csrf" value="${_csrf.token}" />
                         <button type="submit">Send</button>
                     </form>

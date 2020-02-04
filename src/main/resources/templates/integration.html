@@ -64,7 +64,7 @@
                 <div class="block">
                     <div class="form">
                         <form class="login-form" th:action="@{/integrationSQL}" method="post">
-                            <input type="text" placeholder="enter sql code" name="sql" th:value="${sql}" id="sql"/>
+                            <input type="text" required placeholder="enter sql code" name="sql" th:value="${sql}" id="sql"/>
                             <input type="hidden" name="_csrf" value="${_csrf.token}" />
                             <button type="submit">Execute</button>
                         </form>

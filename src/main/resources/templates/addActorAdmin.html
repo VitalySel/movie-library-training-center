@@ -66,9 +66,10 @@
             <div class="login-page">
                 <div class="form">
                     <form class="login-form" th:action="@{/addActor}" method="post">
-                        <div><input type="text" placeholder="name" name="name" id="name"/></div>
-                        <div><input type="text" placeholder="country" name="country" id="country"/></div>
-                        <div><input type="text" placeholder="date" name="date" id="date"/></div>
+                        <div class="alert alert-danger" th:if="${message} != null" th:utext="${message}"></div>
+                        <div><input type="text" required placeholder="name" name="name" id="name"/></div>
+                        <div><input type="text" required placeholder="country" name="country" id="country"/></div>
+                        <div><input type="text" required placeholder="date" name="date" id="date"/></div>
                         <input type="hidden" name="_csrf" value="${_csrf.token}" />
                         <button type="submit">Add Actor</button>
                         <p class="message">Actor List?<a th:href="@{/actorAdmin}">Actors</a></p>

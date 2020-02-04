@@ -86,7 +86,9 @@
                             <li><a href="#" th:href="@{'/movierInfoAdmin/'+ ${movie.id}}"><p class="wow fadeInDown" th:utext="${movie.name}"></p></a></li>
                         </ul>
                     </div>
-                    <a th:href="@{/actorAdmin}" class="btn btn-default btn-home">Actor List</a>
+                    <div sec:authorize="hasRole('ADMIN')">
+                        <a th:href="@{/actorAdmin}" class="btn btn-default btn-home">Actor List</a>
+                    </div>
                 </div>
             </div>
         </div><!-- .row close -->

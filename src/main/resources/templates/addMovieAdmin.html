@@ -66,11 +66,12 @@
             <div class="login-page">
                 <div class="form">
                     <form class="login-form" th:action="@{/addMovie}" method="post">
-                        <div><input type="text" placeholder="name" name="name" id="name"/></div>
-                        <div><input type="text" placeholder="releaseDate" name="releaseDate" id="releaseDate"/></div>
-                        <div><input type="text" placeholder="description" name="description" id="description"/></div>
-                        <div><input type="text" placeholder="duration" name="duration" id="duration"/></div>
-                        <div><input type="text" placeholder="budget" name="budget" id="budget"/></div>
+                        <div class="alert alert-danger" th:if="${message} != null" th:utext="${message}"></div>
+                        <div><input type="text" required placeholder="name" name="name" id="name"/></div>
+                        <div><input type="text" required placeholder="releaseDate" name="releaseDate" id="releaseDate"/></div>
+                        <div><input type="text" required placeholder="description" name="description" id="description"/></div>
+                        <div><input type="text" required placeholder="duration" name="duration" id="duration"/></div>
+                        <div><input type="text" required placeholder="budget" name="budget" id="budget"/></div>
                         <div><div class="bgw"><input type="text" placeholder="producer" name="producerName" id="producerName"/></div></div>
                         <input type="hidden" name="_csrf" value="${_csrf.token}" />
                         <button type="submit">Add Movie</button>

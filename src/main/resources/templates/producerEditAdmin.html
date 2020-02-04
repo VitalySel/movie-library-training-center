@@ -66,9 +66,10 @@
                     <div class="form">
                         <form class="login-form" th:action="@{/producerEdit}" method="post">
                             <ul th:each = "producer:${producers}">
-                                <li><div><input type="text" th:placeholder="${producer.name}" name="name" id="name"/></div></li>
-                                <li><div><input type="text" th:placeholder="${producer.country}" name="country" id="country"/></div></li>
-                                <li><div><input type="text" th:placeholder="${producer.date}" name="date" id="date"/></div></li>
+                                <div class="alert alert-danger" th:if="${message} != null" th:utext="${message}"></div>
+                                <div><input type="text" required th:placeholder="${producer.name}" name="name" id="name"/></div>
+                                <div><input type="text" required th:placeholder="${producer.country}" name="country" id="country"/></div>
+                                <div><input type="text" required th:placeholder="${producer.date}" name="date" id="date"/></div>
                                 <input type="hidden" th:value="@{${producer.id}}" name="producerId">
                                 <input type="hidden" name="_csrf" value="${_csrf.token}" />
                                 <button type="submit">Edit Save</button>

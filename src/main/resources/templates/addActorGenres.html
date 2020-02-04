@@ -63,7 +63,7 @@
             <div class="col-md-6">
                 <div class="block">
                     <div class="caption" th:each="actor:${actors}">
-                        <h1 class="wow" th:text="${actor.name}">...</h1>
+                        <a href="#" th:href="@{'/actorInfoAdmin/'+ ${actor.id}}"><h1 th:text="${actor.name}"></h1></a>
                         <table class="table">
                             <thead class="thead-light">
                             <tr>

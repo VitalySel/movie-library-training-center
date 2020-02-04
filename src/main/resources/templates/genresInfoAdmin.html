@@ -90,10 +90,12 @@
                                 <button type="submit" class="button btn btn-default btn-home ml-4">Producers</button>
                             </form>
                             <p class="wow fadeInDown" th:utext="${countProducers[0].c}"></p>
-                            
+
                         </ul>
                     </div>
-                    <a th:href="@{/genresAdmin}" class="btn btn-default btn-home">Genres List</a>
+                    <div sec:authorize="hasRole('ADMIN')">
+                        <a th:href="@{/genresAdmin}" class="btn btn-default btn-home">Genres List</a>
+                    </div>
                 </div>
             </div>
         </div><!-- .row close -->

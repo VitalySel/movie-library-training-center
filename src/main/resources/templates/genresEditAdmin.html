@@ -66,7 +66,8 @@
                     <div class="form">
                         <form class="login-form" th:action="@{/genreEdit}" method="post">
                             <ul th:each = "genre:${genres}">
-                                <li><div><input type="text" th:placeholder="${genre.genreName}" name="name" id="name"/></div></li>
+                                <div class="alert alert-danger" th:if="${message} != null" th:utext="${message}"></div>
+                                <div><input type="text" required th:placeholder="${genre.genreName}" name="name" id="name"/></div>
                                 <input type="hidden" th:value="@{${genre.id}}" name="genreId">
                                 <input type="hidden" name="_csrf" value="${_csrf.token}" />
                                 <button type="submit">Edit Save</button>

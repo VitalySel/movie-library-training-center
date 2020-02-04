@@ -66,11 +66,12 @@
                     <div class="form">
                         <form class="login-form" th:action="@{/movieEdit}" method="post">
                             <ul th:each = "movie:${movies}">
-                                <li><div><input type="text" th:placeholder="${movie.name}" name="name" id="name"/></div></li>
-                                <li><div><input type="text" th:placeholder="${movie.releaseDate}" name="releaseDate" id="releaseDate"/></div></li>
-                                <li><div><input type="text" th:placeholder="${movie.description}" name="description" id="description"/></div></li>
-                                <li><div><input type="text" th:placeholder="${movie.duration}" name="duration" id="duration"/></div></li>
-                                <li><div><input type="text" th:placeholder="${movie.budget}" name="budget" id="budget"/></div></li>
+                                <div class="alert alert-danger" th:if="${message} != null" th:utext="${message}"></div>
+                                <div><input type="text" required th:placeholder="${movie.name}" name="name" id="name"/></div>
+                                <div><input type="text" required th:placeholder="${movie.releaseDate}" name="releaseDate" id="releaseDate"/></div>
+                                <div><input type="text" required th:placeholder="${movie.description}" name="description" id="description"/></div>
+                                <div><input type="text" required th:placeholder="${movie.duration}" name="duration" id="duration"/></div>
+                                <div><input type="text" required th:placeholder="${movie.budget}" name="budget" id="budget"/></div>
                                 <input type="hidden" th:value="@{${movie.id}}" name="movieId">
                                 <input type="hidden" name="_csrf" value="${_csrf.token}" />
                                 <button type="submit">Edit Save</button>

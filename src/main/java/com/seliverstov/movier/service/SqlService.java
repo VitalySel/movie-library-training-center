@@ -21,16 +21,29 @@ public class SqlService {
     }
 
     public  List<String> selectData(String sql) {
-        List select = jdbcOperations.queryForList(sql);
+        List select = new ArrayList();
+        try {
+            select = jdbcOperations.queryForList(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return select;
     }
 
     public void insertData(String sql) {
-        jdbcOperations.execute(sql);
+        try {
+            jdbcOperations.execute(sql);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void updateData(String sql) {
-        jdbcOperations.execute(sql);
+        try {
+            jdbcOperations.execute(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean sqlCheck(String sql) {

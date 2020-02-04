@@ -66,9 +66,10 @@
                     <div class="form">
                         <form class="login-form" th:action="@{/userEdit}" method="post">
                             <ul th:each = "user:${users}">
-                                <li><div><input type="text" th:placeholder="${user.username}" name="username" id="username"/></div></li>
-                                <li><div><input type="text" th:placeholder="${user.realname}" name="realname" id="realname"/></div></li>
-                                <li><div><input type="text" th:placeholder="${user.mail}" name="mail" id="mail"/></div></li>
+                                <div class="alert alert-danger" th:if="${message} != null" th:utext="${message}"></div>
+                                <div><input type="text" required th:placeholder="${user.username}" name="username" id="username"/></div>
+                                <div><input type="text" required th:placeholder="${user.realname}" name="realname" id="realname"/></div>
+                                <div><input type="text" required th:placeholder="${user.mail}" name="mail" id="mail"/></div>
                                 <input type="hidden" th:value="@{${user.id}}" name="userId">
                                 <input type="hidden" name="_csrf" value="${_csrf.token}" />
                                 <button type="submit">Edit Save</button>
